@@ -1,0 +1,75 @@
+<aside class="max-w-62.5 ease-nav-brand z-990 fixed inset-y-0 my-4 ml-4 block w-full -translate-x-full flex-wrap items-center justify-between overflow-y-auto rounded-2xl border-0 bg-white p-0 antialiased shadow-xl transition-transform duration-200 xl:left-0 xl:translate-x-0">
+  <div class="h-19.5 border-b border-gray-100">
+    <a class="block px-8 py-6 m-0 text-sm whitespace-nowrap" href="/dashboard">
+      <div class="flex items-center">
+        <span class="font-bold text-2xl bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">SMARTEK</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="items-center block w-auto max-h-screen overflow-auto grow">
+    <ul class="flex flex-col pl-0 mb-0 space-y-1 p-4">
+      <li class="w-full">
+        <a [routerLink]="['/dashboard']" routerLinkActive="bg-gradient-to-r from-primary to-accent text-white shadow-lg" [routerLinkActiveOptions]="{exact: true}" class="py-3 text-sm ease-nav-brand flex items-center whitespace-nowrap rounded-xl px-4 font-semibold text-slate-700 transition-all hover:bg-gray-50">
+          <div class="mr-3 flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary/10 to-accent/10">
+            <svg class="text-primary" width="14px" height="14px" viewBox="0 0 45 40" fill="currentColor">
+              <path d="M46.7199583,10.7414583 L40.8449583,0.949791667 C40.4909749,0.360605034 39.8540131,0 39.1666667,0 L7.83333333,0 C7.1459869,0 6.50902508,0.360605034 6.15504167,0.949791667 L0.280041667,10.7414583 C0.0969176761,11.0460037 -1.23209662e-05,11.3946378 -1.23209662e-05,11.75 C-0.00758042603,16.0663731 3.48367543,19.5725301 7.80004167,19.5833333 L7.81570833,19.5833333 C9.75003686,19.5882688 11.6168794,18.8726691 13.0522917,17.5760417 C16.0171492,20.2556967 20.5292675,20.2556967 23.494125,17.5760417 C26.4604562,20.2616016 30.9794188,20.2616016 33.94575,17.5760417 C36.2421905,19.6477597 39.5441143,20.1708521 42.3684437,18.9103691 C45.1927731,17.649886 47.0084685,14.8428276 47.0000295,11.75 C47.0000295,11.3946378 46.9030823,11.0460037 46.7199583,10.7414583 Z"></path>
+            </svg>
+          </div>
+          <span class="duration-300 opacity-100 pointer-events-none ease-soft">Dashboard</span>
+        </a>
+      </li>
+
+      <li class="w-full">
+        <a [routerLink]="['/dashboard/tables']" routerLinkActive="bg-gradient-to-r from-primary to-accent text-white shadow-lg" class="py-3 text-sm ease-nav-brand flex items-center whitespace-nowrap rounded-xl px-4 font-semibold text-slate-700 transition-all hover:bg-gray-50">
+          <div class="mr-3 flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary/10 to-accent/10">
+            <svg class="text-accent" width="14px" height="14px" viewBox="0 0 42 42" fill="currentColor">
+              <path d="M12.25,17.5 L8.75,17.5 L8.75,1.75 C8.75,0.78225 9.53225,0 10.5,0 L31.5,0 C32.46775,0 33.25,0.78225 33.25,1.75 L33.25,12.25 L29.75,12.25 L29.75,3.5 L12.25,3.5 L12.25,17.5 Z"></path>
+            </svg>
+          </div>
+          <span class="duration-300 opacity-100 pointer-events-none ease-soft">Tables</span>
+        </a>
+      </li>
+
+      <li class="w-full">
+        <a [routerLink]="['/dashboard/profile']" routerLinkActive="bg-gradient-to-r from-primary to-accent text-white shadow-lg" class="py-3 text-sm ease-nav-brand flex items-center whitespace-nowrap rounded-xl px-4 font-semibold text-slate-700 transition-all hover:bg-gray-50">
+          <div class="mr-3 flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary/10 to-accent/10">
+            <svg class="text-primary" width="14px" height="14px" viewBox="0 0 46 42" fill="currentColor">
+              <path d="M13,28 C17.432,28 21,22.529 21,18 C21,13.589 17.411,10 13,10 C8.589,10 5,13.589 5,18 C5,22.529 8.568,28 13,28 Z"></path>
+            </svg>
+          </div>
+          <span class="duration-300 opacity-100 pointer-events-none ease-soft">Profile</span>
+        </a>
+      </li>
+
+      <li class="w-full mt-6">
+        <h6 class="pl-6 ml-2 text-xs font-bold leading-tight uppercase text-gray-400">Pages</h6>
+      </li>
+
+      <li class="w-full">
+        <a [routerLink]="['/']" class="py-3 text-sm ease-nav-brand flex items-center whitespace-nowrap rounded-xl px-4 font-semibold text-slate-700 transition-all hover:bg-gray-50">
+          <div class="mr-3 flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary/10 to-accent/10">
+            <svg class="text-accent" width="14px" height="14px" viewBox="0 0 40 40" fill="currentColor">
+              <path d="M18.0883333 15.7316667 L11.1783333 8.82166667 13.3333333 6.66666667 6.66666667 0 0 6.66666667 6.66666667 13.3333333 8.82166667 11.1783333 15.315 17.6716667"></path>
+            </svg>
+          </div>
+          <span class="duration-300 opacity-100 pointer-events-none ease-soft">Back to Website</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- User Profile at bottom -->
+  <div class="p-4 border-t border-gray-100">
+    <div class="flex items-center space-x-3 p-3 rounded-xl bg-gradient-to-r from-primary/5 to-accent/5">
+      <div class="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center overflow-hidden">
+        <img *ngIf="getUserImage()" [src]="getUserImage()" alt="User avatar" class="w-full h-full object-cover">
+        <span *ngIf="!getUserImage()" class="text-white font-semibold">{{ getUserInitial() }}</span>
+      </div>
+      <div class="flex-1">
+        <p class="text-sm font-semibold text-text">{{ currentUser?.firstName || 'User' }}</p>
+        <p class="text-xs text-gray-500 truncate">{{ currentUser?.email || 'user@smartek.com' }}</p>
+      </div>
+    </div>
+  </div>
+</aside>

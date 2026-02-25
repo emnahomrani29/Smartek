@@ -36,7 +36,8 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
     
-    private Claims extractAllClaims(String token) {
+    // expose claims publicly so other components (filters/controllers) can read them
+    public Claims extractAllClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(getSignKey())
                 .build()
@@ -75,5 +76,14 @@ public class JwtService {
     private Key getSignKey() {
         byte[] keyBytes = secret.getBytes();
         return Keys.hmacShaKeyFor(keyBytes);
+    }
+    public Long extractUserId(String token) {
+        // Extraire l'ID utilisateur du token JWT
+        Claims claims = extractAllClaims(token);
+        return claims.get("userId", Long.class);  // Supposant que vous stockez userId dans le token
+    }
+
+    public String extractEmail(String token) {
+        return extractUsername(token);  // Votre méthode existante
     }
 }

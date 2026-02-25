@@ -19,6 +19,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   userMenuOpen = false;
   currentUser: AuthResponse | null = null;
 
+  // keep reference to subscription so we can clean up
+  private authStatusSub: any;
+
   constructor(
     private dataService: DataService,
     private router: Router,
@@ -26,29 +29,38 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    console.log("Rôle actuel :", this.authService.getUserRole());
+    console.log("isAdmin() :", this.isAdmin());
+
     this.dataService.getData().subscribe(data => {
-      this.headerData = data.HeaderData;
+      console.log("HeaderData reçu :", data?.HeaderData);
+      this.headerData = data?.HeaderData || [];
     });
 
     window.addEventListener('scroll', this.handleScroll.bind(this));
     
-    // Vérifier si l'utilisateur est connecté
+    // initialize current user if already logged in
     this.currentUser = this.authService.getUserInfo();
-    
-    // Si connecté, récupérer les données à jour depuis la base de données
-    if (this.isAuthenticated()) {
-      this.authService.fetchUserData().subscribe({
-        next: (userData) => {
-          this.currentUser = userData;
-        },
-        error: (error) => {
-          console.error('Error fetching user data:', error);
-        }
-      });
-      
-      this.startUserValidation();
-    }
-    
+
+    // subscribe to auth state so the header updates when login/logout occurs
+    this.authStatusSub = this.authService.authStatus$.subscribe(isAuth => {
+      if (isAuth) {
+        this.currentUser = this.authService.getUserInfo();
+        this.startUserValidation();
+
+        // optionally refresh user data from server
+        this.authService.fetchUserData().subscribe({
+          next: (userData) => {
+            this.currentUser = userData;
+          },
+          error: (error) => console.error('Error fetching user data:', error)
+        });
+      } else {
+        this.currentUser = null;
+        this.stopUserValidation();
+      }
+    });
+
     // Fermer le menu utilisateur quand on clique en dehors
     document.addEventListener('click', this.handleClickOutside.bind(this));
   }
@@ -56,6 +68,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     document.removeEventListener('click', this.handleClickOutside.bind(this));
     this.stopUserValidation();
+    if (this.authStatusSub) {
+      this.authStatusSub.unsubscribe();
+    }
   }
 
   private validationInterval: any;
@@ -125,6 +140,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.router.navigate(['/settings']);
   }
 
+  goToSkillEvidence(): void {
+    this.userMenuOpen = false;
+    this.router.navigate(['/learner/skill-evidence']);
+  }
+
+  // Dans header.component.ts
+goToLearningStyle(): void {
+    this.userMenuOpen = false;
+    this.router.navigate(['/learner/learning-style']);
+}
+
   logout(): void {
     this.userMenuOpen = false;
     this.authService.logout();
@@ -148,6 +174,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   isAdmin(): boolean {
     return this.authService.getUserRole() === 'ADMIN';
+  }
+
+  isLearner(): boolean {
+    return this.authService.getUserRole() === 'LEARNER';
   }
 
   getCoursesLink(): string {

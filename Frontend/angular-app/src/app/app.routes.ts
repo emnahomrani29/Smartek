@@ -23,7 +23,7 @@ import { LearnerParticipationComponent } from './features/learner/participation/
 import { TrainerLayoutComponent } from './features/trainer/trainer-layout/trainer-layout.component';
 import { TrainerCoursesComponent } from './features/trainer/courses/courses.component';
 import { TrainingManagementComponent } from './features/trainer/training-management/training-management.component';
-import { SkillEvidenceComponent } from './features/trainer/skill-evidence/skill-evidence.component';
+import { SkillEvidenceComponent } from './features/learner/skill-evidence/skill-evidence.component';
 import { BadgeManagementComponent } from './features/trainer/badge-management/badge-management.component';
 
 // RH Smartek Components
@@ -47,6 +47,8 @@ import { PartnerEventsComponent } from './features/partner/events/events.compone
 
 // Test Component
 import { RoleTestComponent } from './features/test/role-test/role-test.component';
+import { LearningStyleComponent }  from './features/learner/learning-style/learning-style.component';
+import { AdminSkillEvidenceComponent } from './features/admin/admin-skill-evidence/admin-skill-evidence.component';
 
 export const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -74,7 +76,8 @@ export const routes: Routes = [
     children: [
       { path: 'users', component: UserManagementComponent },
       { path: 'companies', component: CompanyManagementComponent },
-      { path: 'contracts', component: ContractManagementComponent }
+      { path: 'contracts', component: ContractManagementComponent },
+      { path: 'skill-evidence', component: AdminSkillEvidenceComponent },
     ]
   },
 
@@ -89,7 +92,9 @@ export const routes: Routes = [
       { path: 'courses', component: LearnerCoursesComponent },
       { path: 'exams', component: LearnerExamsComponent },
       { path: 'certifications', component: LearnerCertificationsComponent },
-      { path: 'participation', component: LearnerParticipationComponent }
+      { path: 'participation', component: LearnerParticipationComponent },
+      { path: 'skill-evidence', component: SkillEvidenceComponent },
+      { path: 'learning-style', component: LearningStyleComponent }
     ]
   },
 

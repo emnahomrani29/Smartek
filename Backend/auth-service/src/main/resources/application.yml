@@ -1,16 +1,15 @@
 spring:
   application:
     name: auth-service
-  
+
   datasource:
     url: jdbc:mysql://localhost:3306/smartek_db?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
     username: root
-    password:
     driver-class-name: com.mysql.cj.jdbc.Driver
   
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
@@ -41,5 +40,8 @@ jwt:
 # Logging
 logging:
   level:
-    com.smartek: DEBUG
-    org.springframework.security: DEBUG
+    root: INFO                    # niveau par défaut
+    com.smartek: DEBUG            # tes packages (authservice, skill, etc.)
+    org.springframework.security: DEBUG   # très utile ici
+    org.springframework.web: DEBUG        # pour voir les requêtes entrantes
+    org.springframework.web.filter: DEBUG # pour voir les filtres

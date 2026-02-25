@@ -1,0 +1,157 @@
+POST http://localhost:8081/api/skill-evidence
+Content-Type: application/json
+Content-Length: 116
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "title": "test",
+  "description": "test",
+  "fileUrl": "https://github.com/test",
+  "uploadDate": "24-02-2026"
+}
+
+###
+
+POST http://127.0.0.1:8081/api/skill-evidence
+Content-Type: application/json
+Content-Length: 116
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "title": "test",
+  "description": "test",
+  "fileUrl": "https://github.com/test",
+  "uploadDate": "24-02-2026"
+}
+
+###
+
+POST http://127.0.0.1:8081/api/skill-evidence
+Content-Type: application/json
+Content-Length: 110
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "title": "test",
+  "description": "test",
+  "fileUrl": "http://github.com",
+  "uploadDate": "24-02-2026"
+}
+
+###
+
+POST http://127.0.0.1:8081/api/skill-evidence
+Content-Type: application/json
+Content-Length: 110
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "title": "test",
+  "description": "test",
+  "fileUrl": "http://github.com",
+  "uploadDate": "24-02-2026"
+}
+
+###
+
+POST http://localhost:8081/api/skill-evidence
+Content-Type: application/json
+Content-Length: 110
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "title": "test",
+  "description": "test",
+  "fileUrl": "http://github.com",
+  "uploadDate": "24-02-2026"
+}
+
+###
+
+POST http://localhost:8081/api/skill-evidence
+Content-Type: application/json
+Content-Length: 110
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "title": "test",
+  "description": "test",
+  "fileUrl": "http://github.com",
+  "uploadDate": "24-02-2026"
+}
+
+###
+
+POST http://localhost:8081/api/skill-evidence
+Content-Type: application/json
+Content-Length: 72
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "title": "test",
+  "description": "test",
+  "externalLink": "test"
+}
+
+###
+
+POST http://localhost:8081/api/skill-evidence
+Content-Type: application/json
+Content-Length: 72
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "title": "test",
+  "description": "test",
+  "externalLink": "test"
+}
+
+###
+
+POST http://localhost:8081/api/skill-evidence
+Content-Type: application/json
+Content-Length: 72
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "title": "test",
+  "description": "test",
+  "externalLink": "test"
+}
+
+###
+
+POST http://localhost:8081/api/skill-evidence
+Content-Type: application/json
+Content-Length: 104
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.2.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "title": "test",
+  "description": "test",
+  "externalLink": "github.com",
+  "evidenceType": "test"
+}
+
+###
+

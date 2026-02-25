@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9b01a4bf-4a0e-47b9-a43b-aa54d00785ad" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/smartek/authservice/controller/LearningStyleController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/smartek/authservice/controller/SkillEvidenceController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/smartek/authservice/dto/LearningStylePreferenceDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/smartek/authservice/dto/SkillEvidenceCreateDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/smartek/authservice/dto/SkillEvidenceResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/smartek/authservice/entity/LearningStylePreference.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/smartek/authservice/entity/SkillEvidence.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/smartek/authservice/enums/LearningStyleType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/smartek/authservice/repository/LearningStylePreferenceRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/smartek/authservice/repository/SkillEvidenceRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/smartek/authservice/service/LearningStyleService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/smartek/authservice/service/SkillEvidenceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/smartek/authservice/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/smartek/authservice/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/smartek/authservice/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/smartek/authservice/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/smartek/authservice/service/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/smartek/authservice/service/JwtService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/smartek/authservice/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/smartek/authservice/config/SecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/smartek/authservice/dto/AuthResponse$AuthResponseBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/smartek/authservice/dto/AuthResponse$AuthResponseBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/smartek/authservice/dto/AuthResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/smartek/authservice/dto/AuthResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/smartek/authservice/dto/LoginRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/smartek/authservice/dto/LoginRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/smartek/authservice/dto/RegisterRequest$RegisterRequestBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/smartek/authservice/dto/RegisterRequest$RegisterRequestBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/smartek/authservice/dto/RegisterRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/smartek/authservice/dto/RegisterRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/smartek/authservice/entity/User$UserBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/smartek/authservice/entity/User$UserBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/smartek/authservice/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/smartek/authservice/entity/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/smartek/authservice/repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/smartek/authservice/repository/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/smartek/authservice/service/AuthService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/smartek/authservice/service/AuthService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/smartek/authservice/service/JwtService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/smartek/authservice/service/JwtService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/angular-app/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/angular-app/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/angular-app/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/angular-app/src/app/app.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/angular-app/src/app/core/interceptors/auth.interceptor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/angular-app/src/app/core/interceptors/auth.interceptor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/angular-app/src/app/core/services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/angular-app/src/app/core/services/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/angular-app/src/app/features/dashboard/dashboard-layout/dashboard-layout.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/angular-app/src/app/features/dashboard/dashboard-layout/dashboard-layout.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/angular-app/src/app/features/dashboard/dashboard-layout/dashboard-layout.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/angular-app/src/app/features/dashboard/dashboard-layout/dashboard-layout.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/angular-app/src/app/features/dashboard/sidebar/sidebar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/angular-app/src/app/features/dashboard/sidebar/sidebar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/angular-app/src/app/features/trainer/skill-evidence/skill-evidence.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/angular-app/src/app/features/trainer/skill-evidence/skill-evidence.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/angular-app/src/app/features/trainer/skill-evidence/skill-evidence.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/angular-app/src/app/shared/header/header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/angular-app/src/app/shared/header/header.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/angular-app/src/app/shared/header/header.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/angular-app/src/app/shared/header/header.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Frontend/angular-app/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Frontend/angular-app/src/index.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;wafachabbi&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/emnahomrani29/Smartek.git&quot;,
+    &quot;accountId&quot;: &quot;5e4d73cf-c6b1-4053-be35-b1a00e849029&quot;
+  }
+}</component>
+  <component name="HttpClientSelectedEnvironments">
+    <file url="file://$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" />
+  </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\xampp\php\php.exe" />
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="3A1Gr4qBVjJD6oB39IRAPJR1FDO" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "HTTP Request.generated-requests | #49.executor": "Run",
+    "HTTP Request.generated-requests | #50.executor": "Run",
+    "HTTP Request.generated-requests | #51.executor": "Run",
+    "HTTP Request.generated-requests | #52.executor": "Run",
+    "HTTP Request.generated-requests | #54.executor": "Run",
+    "HTTP Request.generated-requests | #56.executor": "Run",
+    "HTTP Request.generated-requests | #57.executor": "Run",
+    "HTTP Request.generated-requests | #58.executor": "Run",
+    "Maven.auth-service [clean].executor": "Run",
+    "Maven.auth-service [install].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.AuthServiceApplication.executor": "Run",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/ProjetPi/Smartek",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="Spring Boot.AuthServiceApplication">
+    <configuration name="generated-requests | #52" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="52" requestIdentifier="#52" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests | #54" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="54" requestIdentifier="#54" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests | #56" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="56" requestIdentifier="#56" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests | #57" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="57" requestIdentifier="#57" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests | #58" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="58" requestIdentifier="#58" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="AuthServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="auth-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.smartek.authservice.AuthServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.generated-requests | #58" />
+        <item itemvalue="HTTP Request.generated-requests | #57" />
+        <item itemvalue="HTTP Request.generated-requests | #56" />
+        <item itemvalue="HTTP Request.generated-requests | #54" />
+        <item itemvalue="HTTP Request.generated-requests | #52" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9b01a4bf-4a0e-47b9-a43b-aa54d00785ad" name="Changes" comment="" />
+      <created>1771752858395</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1771752858395</updated>
+      <workItem from="1771752860178" duration="3398000" />
+      <workItem from="1771931100555" duration="7826000" />
+      <workItem from="1771944671263" duration="4207000" />
+      <workItem from="1771959060670" duration="9226000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

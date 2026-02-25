@@ -56,8 +56,23 @@
           <span class="duration-300 opacity-100 pointer-events-none ease-soft">Back to Website</span>
         </a>
       </li>
+     <!-- sidebar.component.html - CORRIGÉ -->
+<li *ngIf="currentUser?.role === 'ADMIN'" class="w-full">
+  <a [routerLink]="['/admin/skill-evidence']" 
+     routerLinkActive="bg-gradient-to-r from-primary to-accent text-white shadow-lg"
+     class="py-3 text-sm ease-nav-brand flex items-center whitespace-nowrap rounded-xl px-4 font-semibold text-slate-700 transition-all hover:bg-gray-50">
+    <div class="mr-3 flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary/10 to-accent/10">
+      <svg class="text-primary" width="14px" height="14px" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zM13 21h8V11h-8v10zm0-18v6h8V3h-8z"></path>
+      </svg>
+    </div>
+    <span class="duration-300 opacity-100 pointer-events-none ease-soft">Skill Evidence</span>
+  </a>
+</li>
     </ul>
   </div>
+
+  
 
   <!-- User Profile at bottom -->
   <div class="p-4 border-t border-gray-100">
@@ -70,6 +85,7 @@
         <p class="text-sm font-semibold text-text">{{ currentUser?.firstName || 'User' }}</p>
         <p class="text-xs text-gray-500 truncate">{{ currentUser?.email || 'user@smartek.com' }}</p>
       </div>
+      
     </div>
   </div>
 </aside>

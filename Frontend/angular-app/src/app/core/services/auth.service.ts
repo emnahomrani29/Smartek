@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap, map, catchError, of } from 'rxjs';
+import { Observable, tap, map, catchError, of, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 
 export interface RegisterRequest {
@@ -35,6 +35,12 @@ export interface AuthResponse {
 export class AuthService {
   private apiUrl = 'http://localhost:8081/api/auth';
 
+  // BehaviourSubject holds current authentication state so other components can
+  // react instantly (header, guards, etc.). Initialized with current token
+  // presence so reloads still show correct UI.
+  private authStatusSubject = new BehaviorSubject<boolean>(!!this.getToken());
+  authStatus$ = this.authStatusSubject.asObservable();
+
   constructor(
     private http: HttpClient,
     private router: Router
@@ -45,6 +51,7 @@ export class AuthService {
       tap(response => {
         this.saveToken(response.token);
         this.saveUserInfo(response);
+        this.authStatusSubject.next(true);
       })
     );
   }
@@ -54,6 +61,7 @@ export class AuthService {
       tap(response => {
         this.saveToken(response.token);
         this.saveUserInfo(response);
+        this.authStatusSubject.next(true);
       })
     );
   }
@@ -61,6 +69,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('userInfo');
+    this.authStatusSubject.next(false);
     this.router.navigate(['/']);
   }
 

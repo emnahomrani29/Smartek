@@ -1,0 +1,191 @@
+<!-- features/learner/learning-style/learning-style.component.html -->
+
+<div class="learning-style-container">
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>Learning Style</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/learner">Learner</a></li>
+                <li class="breadcrumb-item active">Learning Style</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Loading State -->
+    <div class="loading-state" *ngIf="isLoading">
+        <div class="spinner-large"></div>
+        <p>Loading your preferences...</p>
+    </div>
+
+    <!-- Content Card -->
+    <div class="content-card" *ngIf="!isLoading">
+        <div class="card-header">
+            <div class="header-title">
+                <span class="header-icon">🎯</span>
+                <div>
+                    <h2>My Learning Preferences</h2>
+                    <p>Customize how you learn best</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <!-- Boutons selon le mode -->
+                <ng-container *ngIf="hasPreferences && isViewMode">
+                    <button class="btn btn-edit" (click)="editMode()">
+                        <i class="fas fa-edit"></i>
+                        <span>Edit</span>
+                    </button>
+                    <button class="btn btn-delete" (click)="deletePreferences()">
+                        <i class="fas fa-trash"></i>
+                        <span>Delete</span>
+                    </button>
+                </ng-container>
+                <button class="btn btn-secondary" (click)="goBack()">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Message d'erreur -->
+        <div class="error-alert" *ngIf="errorMessage">
+            <i class="fas fa-exclamation-circle"></i>
+            <span>{{ errorMessage }}</span>
+            <button class="close-btn" (click)="errorMessage = ''">×</button>
+        </div>
+
+        <!-- MODE VISUALISATION -->
+        <div class="style-view" *ngIf="isViewMode && hasPreferences && currentPreferences">
+            <div class="view-section">
+                <h3>My main learning style</h3>
+                <div class="view-card">
+                    <div class="view-icon" [style.background]="getStyleColor(currentPreferences.preferredStyle)">
+                        <i [class]="styleIcons[currentPreferences.preferredStyle]"></i>
+                    </div>
+                    <div class="view-info">
+                        <h4>{{ styleLabels[currentPreferences.preferredStyle] }}</h4>
+                        <p>{{ styleDescriptions[currentPreferences.preferredStyle] }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="view-section">
+                <h3>Preferred content formats</h3>
+                <div class="view-tags">
+                    <span class="tag" *ngIf="currentPreferences.videoPreferred" style="background: #2196F3">
+                        <i class="fas fa-video"></i> Videos
+                    </span>
+                    <span class="tag" *ngIf="currentPreferences.textPreferred" style="background: #4CAF50">
+                        <i class="fas fa-file-alt"></i> Texts
+                    </span>
+                    <span class="tag" *ngIf="currentPreferences.practicalWorkPreferred" style="background: #FF9800">
+                        <i class="fas fa-code"></i> Practical Work
+                    </span>
+                    <span class="tag-default" *ngIf="!currentPreferences.videoPreferred && !currentPreferences.textPreferred && !currentPreferences.practicalWorkPreferred">
+                        No preferences
+                    </span>
+                </div>
+            </div>
+
+          
+        </div>
+
+        <!-- MODE ÉDITION -->
+        <div class="style-form" *ngIf="!isViewMode">
+            <form [formGroup]="styleForm" (ngSubmit)="onSubmit()">
+                <!-- Style principal -->
+                <div class="form-section">
+                    <h3>My main learning style</h3>
+                    <p class="section-description">
+                        Choose the way you learn most effectively
+                    </p>
+
+                    <div class="style-options-grid">
+                        <div *ngFor="let style of learningStyleTypes" 
+                             class="style-option-card"
+                             [class.selected]="styleForm.get('preferredStyle')?.value === style"
+                             [style.borderColor]="getStyleColor(style)"
+                             (click)="styleForm.patchValue({preferredStyle: style})">
+                            <div class="style-icon" [style.background]="getStyleColor(style)">
+                                <i [class]="styleIcons[style]"></i>
+                            </div>
+                            <div class="style-info">
+                                <h4>{{ styleLabels[style] }}</h4>
+                                <p>{{ styleDescriptions[style] }}</p>
+                            </div>
+                            <div class="style-check" *ngIf="styleForm.get('preferredStyle')?.value === style">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formats préférés -->
+                <div class="form-section">
+                    <h3>Preferred content formats</h3>
+                    <p class="section-description">
+                        Select the content types you prefer (optional)
+                    </p>
+
+                    <div class="checkbox-group">
+                        <label class="checkbox-card">
+                            <input type="checkbox" formControlName="videoPreferred">
+                            <span class="checkbox-content">
+                                <i class="fas fa-video"></i>
+                                <span class="checkbox-label">Videos</span>
+                            </span>
+                        </label>
+
+                        <label class="checkbox-card">
+                            <input type="checkbox" formControlName="textPreferred">
+                            <span class="checkbox-content">
+                                <i class="fas fa-file-alt"></i>
+                                <span class="checkbox-label">Texts / Documentation</span>
+                            </span>
+                        </label>
+
+                        <label class="checkbox-card">
+                            <input type="checkbox" formControlName="practicalWorkPreferred">
+                            <span class="checkbox-content">
+                                <i class="fas fa-code"></i>
+                                <span class="checkbox-label">Practical Work</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Actions d'édition -->
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" (click)="cancelEdit()">
+                        <i class="fas fa-times"></i>
+                        <span>Cancel</span>
+                    </button>
+                    <button type="submit" class="btn btn-primary" [disabled]="isSubmitting">
+                        <i class="fas" [ngClass]="isSubmitting ? 'fa-spinner fa-spin' : 'fa-save'"></i>
+                        <span>{{ isSubmitting ? 'Saving...' : 'Save' }}</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de confirmation DELETE -->
+    <div class="modal-overlay" *ngIf="showDeleteConfirm" (click)="cancelDelete()">
+        <div class="modal-box" (click)="$event.stopPropagation()">
+            <h2>Delete</h2>
+            <p>Are you sure you want to delete your preferences?</p>
+            <p class="warning">This action is irreversible.</p>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" (click)="cancelDelete()">
+                    <i class="fas fa-times"></i>
+                    <span>Cancel</span>
+                </button>
+                <button class="btn btn-danger" (click)="confirmDelete()">
+                    <i class="fas fa-trash"></i>
+                    <span>Delete</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

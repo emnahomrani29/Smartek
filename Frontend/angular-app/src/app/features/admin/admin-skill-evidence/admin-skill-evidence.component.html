@@ -1,0 +1,104 @@
+<!-- features/admin/skill-evidence-list/admin-skill-evidence.component.html -->
+
+<div class="modern-evidence-container">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <h1>Skill Evidences</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item active">All the evidence</li>
+      </ol>
+    </nav>
+  </div>
+
+  <!-- Content Card -->
+  <div class="content-card">
+
+    <!-- Card Header -->
+    <div class="card-header">
+      <div class="header-title">
+        <i class="fa fa-certificate header-icon"></i>
+        <div>
+          <h2>Skill Evidences</h2>
+          <p class="text-muted">List of all learners' skill evidences</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="loading" class="loading-state">
+      <div class="spinner"></div>
+      <p>Loading skill evidences...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="error && !loading" class="error-state">
+      <i class="fa fa-exclamation-circle"></i>
+      <p>{{ error }}</p>
+    </div>
+
+    <!-- Table -->
+    <div *ngIf="!loading && !error" class="table-responsive">
+      <div *ngIf="evidences.length === 0" class="empty-state">
+        <i class="fa fa-folder-open"></i>
+        <p>No skill evidence found.</p>
+      </div>
+
+      <table *ngIf="evidences.length > 0" class="table modern-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Learner</th>
+            <th>Description</th>
+            <th>Date Added</th>
+            <th>File</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let evidence of evidences">
+            <td data-label="Titre">
+              <strong>{{ evidence.title || '—' }}</strong>
+            </td>
+            
+            <td data-label="Apprenant">
+              <div class="user-info">
+                <i class="fa fa-user-circle user-icon"></i>
+                <span>{{ evidence.user?.fullName || evidence.user?.email || 'Inconnu' }}</span>
+              </div>
+            </td>
+            
+            <td data-label="Description" class="description-cell">
+              <span *ngIf="evidence.description; else noDesc">
+                {{ evidence.description.length > 100 
+                  ? (evidence.description | slice:0:100) + '...' 
+                  : evidence.description }}
+              </span>
+              <ng-template #noDesc>—</ng-template>
+            </td>
+            
+            <td data-label="Date d'ajout">
+              <span class="date-badge">
+                <i class="fa fa-calendar"></i>
+                {{ formatDate(evidence.uploadDate) }}
+              </span>
+            </td>
+
+            <td data-label="Fichier">
+              <ng-container *ngIf="evidence.fileUrl; else noFile">
+                <a [href]="evidence.fileUrl" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="file-link">
+                  <i class="fa fa-file-pdf"></i> View
+                </a>
+              </ng-container>
+              <ng-template #noFile>—</ng-template>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,151 @@
+<div class="modern-evidence-container">
+
+  <div class="page-header">
+    <h1>Skill Evidences</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active">
+          {{ canEdit ? 'My Evidences' : 'Viewing – Admin' }}
+        </li>
+      </ol>
+    </nav>
+  </div>
+
+  <div class="content-card">
+
+    <div class="card-header">
+      <div class="header-title">
+        <i class="fa fa-certificate header-icon"></i>
+        <div>
+          <h2>Skill Evidences</h2>
+          <p class="text-muted">
+            {{ canEdit ? 'Manage your skill evidences and supporting documents' : 'Viewing skill evidences (read-only)' }}
+          </p>
+        </div>
+      </div>
+
+      <button *ngIf="canEdit"
+              class="btn btn-primary"
+              (click)="openAddForm()">
+        <i class="fa fa-plus"></i> Add Evidence
+      </button>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table modern-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Date Added</th>
+            <th *ngIf="canEdit">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let evidence of evidences; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>
+              <div class="title-cell">
+                <strong>{{ evidence.title || 'Sans titre' }}</strong>
+                <span *ngIf="evidence.fileUrl" class="file-badge" 
+                      (click)="viewEvidence(evidence)" style="cursor: pointer;">
+                  <i class="fa fa-paperclip"></i>
+                </span>
+              </div>
+            </td>
+            <td>{{ evidence.description || '—' }}</td>
+            <td>
+              <span class="date-badge">
+                <i class="fa fa-calendar"></i>
+                {{ evidence.uploadDate | date:'dd MMM yyyy' || '—' }}
+              </span>
+            </td>
+
+            <td *ngIf="canEdit">
+              <div class="action-group">
+                <button class="btn-action edit" 
+                        (click)="editEvidence(evidence)">
+                  <i class="fa fa-edit"></i> Edit
+                </button>
+                <button class="btn-action delete" 
+                        (click)="deleteEvidence(evidence.evidenceId)">
+                  <i class="fa fa-trash"></i> Delete
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <tr *ngIf="!isLoading && evidences.length === 0">
+            <td [attr.colspan]="canEdit ? 5 : 4" class="text-center py-5 text-muted">
+              No skill evidence available
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div *ngIf="isLoading" class="text-center py-5">
+        <i class="fa fa-spinner fa-spin me-2"></i> Loading...
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL UNIQUEMENT POUR LEARNERS -->
+<div class="modal-overlay" *ngIf="showEditModal && canEdit" (click)="closeEditModal()">
+  <div class="modal-box" (click)="$event.stopPropagation()">
+    <h2>{{ selectedEvidence?.evidenceId ? 'Edit Evidence' : 'Add Evidence' }}</h2>
+
+    <ng-container *ngIf="selectedEvidence">
+      <div *ngIf="errorMessage || Object.keys(validationErrors).length" class="error-alert">
+        <i class="fa fa-exclamation-circle"></i>
+        {{ errorMessage || 'Please correct the errors below' }}
+      </div>
+
+      <div class="form-group">
+        <label>Title <span class="text-danger">*</span></label>
+        <input type="text" [(ngModel)]="selectedEvidence.title" class="form-control"
+               [class.is-invalid]="validationErrors['title']" />
+        <div *ngIf="validationErrors['title']" class="invalid-feedback">
+          {{ validationErrors['title'] }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Description (facultatif)</label>
+        <textarea [(ngModel)]="selectedEvidence.description" class="form-control" rows="4"
+                  [class.is-invalid]="validationErrors['description']"></textarea>
+        <small>{{ selectedEvidence.description?.length || 0 }}/500</small>
+        <div *ngIf="validationErrors['description']" class="invalid-feedback">
+          {{ validationErrors['description'] }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>File Link (URL – facultatif)</label>
+        <input type="text" [(ngModel)]="selectedEvidence.fileUrl" class="form-control"
+               [class.is-invalid]="validationErrors['fileUrl']" />
+        <div *ngIf="validationErrors['fileUrl']" class="invalid-feedback">
+          {{ validationErrors['fileUrl'] }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Date Added <span class="text-danger">*</span></label>
+        <input type="date" [(ngModel)]="selectedEvidence.uploadDate" class="form-control"
+               [class.is-invalid]="validationErrors['uploadDate']" />
+        <div *ngIf="validationErrors['uploadDate']" class="invalid-feedback">
+          {{ validationErrors['uploadDate'] }}
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn btn-success" (click)="saveEdit()"
+                [disabled]="Object.keys(validationErrors).length > 0">
+          Save
+        </button>
+        <button class="btn btn-secondary" (click)="closeEditModal()">Cancel</button>
+      </div>
+    </ng-container>
+  </div>
+</div>

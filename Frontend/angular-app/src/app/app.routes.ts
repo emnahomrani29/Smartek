@@ -70,12 +70,17 @@ export const routes: Routes = [
         canActivate: [permissionGuard],
         data: { roles: [Role.LEARNER], permissions: [Permission.TRAINING_VIEW] }
       },
-      // Certifications & Badges
+      // Badges Management
+      { 
+        path: 'badges', 
+        loadChildren: () => import('./features/certifications-badges/badges.module').then(m => m.BadgesModule),
+        canActivate: [authGuard]
+      },
+      // Certifications Management
       { 
         path: 'certifications', 
-        component: DashboardPageComponent,
-        canActivate: [permissionGuard],
-        data: { permissions: [Permission.CERTIFICATIONS_VIEW, Permission.BADGES_VIEW] }
+        loadChildren: () => import('./features/certifications-badges/certifications.module').then(m => m.CertificationsModule),
+        canActivate: [authGuard]
       },
       // My Certifications - LEARNER
       { 

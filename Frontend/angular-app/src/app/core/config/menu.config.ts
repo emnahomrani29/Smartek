@@ -74,10 +74,16 @@ export const MENU_ITEMS: MenuItem[] = [
 
   // Certification & Badge Management - RH_SMARTEK
   {
-    label: 'Certifications & Badges',
+    label: 'Certifications',
     icon: 'workspace_premium',
     route: '/dashboard/certifications',
-    permissions: [Permission.CERTIFICATIONS_VIEW, Permission.BADGES_VIEW]
+    permissions: [Permission.CERTIFICATIONS_VIEW]
+  },
+  {
+    label: 'Badges',
+    icon: 'military_tech',
+    route: '/dashboard/badges',
+    permissions: [Permission.BADGES_VIEW]
   },
 
   // My Certifications - LEARNER

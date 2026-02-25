@@ -1,0 +1,160 @@
+<div class="event-management">
+  <div class="header">
+    <h1>Event Management</h1>
+    <button class="btn btn-primary" (click)="openCreateForm()" *ngIf="!showForm">
+      <i class="fas fa-plus"></i> Create Event
+    </button>
+  </div>
+
+  <!-- Error Message -->
+  <div class="alert alert-error" *ngIf="error">
+    {{ error }}
+  </div>
+
+  <!-- Loading Spinner -->
+  <div class="loading" *ngIf="loading && !showForm">
+    <div class="spinner"></div>
+    <p>Loading...</p>
+  </div>
+
+  <!-- Event Form -->
+  <div class="form-container" *ngIf="showForm">
+    <div class="form-header">
+      <h2>{{ isEditing ? 'Edit Event' : 'Create New Event' }}</h2>
+      <button class="btn-close" (click)="closeForm()">×</button>
+    </div>
+
+    <form [formGroup]="eventForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="title">Title *</label>
+        <input
+          type="text"
+          id="title"
+          formControlName="title"
+          class="form-control"
+          placeholder="Enter event title"
+        />
+        <div class="error-message" *ngIf="eventForm.get('title')?.invalid && eventForm.get('title')?.touched">
+          <span *ngIf="eventForm.get('title')?.errors?.['required']">Title is required</span>
+          <span *ngIf="eventForm.get('title')?.errors?.['maxlength']">Title must not exceed 200 characters</span>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="startDate">Start Date *</label>
+          <input
+            type="datetime-local"
+            id="startDate"
+            formControlName="startDate"
+            class="form-control"
+          />
+          <div class="error-message" *ngIf="eventForm.get('startDate')?.invalid && eventForm.get('startDate')?.touched">
+            Start date is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="endDate">End Date *</label>
+          <input
+            type="datetime-local"
+            id="endDate"
+            formControlName="endDate"
+            class="form-control"
+          />
+          <div class="error-message" *ngIf="eventForm.get('endDate')?.invalid && eventForm.get('endDate')?.touched">
+            End date is required
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="location">Location *</label>
+        <input
+          type="text"
+          id="location"
+          formControlName="location"
+          class="form-control"
+          placeholder="Enter event location"
+        />
+        <div class="error-message" *ngIf="eventForm.get('location')?.invalid && eventForm.get('location')?.touched">
+          <span *ngIf="eventForm.get('location')?.errors?.['required']">Location is required</span>
+          <span *ngIf="eventForm.get('location')?.errors?.['maxlength']">Location must not exceed 255 characters</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="maxParticipations">Max Participations *</label>
+        <input
+          type="number"
+          id="maxParticipations"
+          formControlName="maxParticipations"
+          class="form-control"
+          min="1"
+        />
+        <div class="error-message" *ngIf="eventForm.get('maxParticipations')?.invalid && eventForm.get('maxParticipations')?.touched">
+          <span *ngIf="eventForm.get('maxParticipations')?.errors?.['required']">Max participations is required</span>
+          <span *ngIf="eventForm.get('maxParticipations')?.errors?.['min']">Must be at least 1</span>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-secondary" (click)="closeForm()">Cancel</button>
+        <button type="submit" class="btn btn-primary" [disabled]="eventForm.invalid || loading">
+          {{ isEditing ? 'Update' : 'Create' }} Event
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Events List -->
+  <div class="events-list" *ngIf="!showForm">
+    <div class="events-grid">
+      <div class="event-card" *ngFor="let event of events">
+        <div class="event-header">
+          <h3>{{ event.title }}</h3>
+          <span class="badge" [class.badge-success]="event.isAvailable" [class.badge-danger]="!event.isAvailable">
+            {{ event.isAvailable ? 'Available' : 'Full' }}
+          </span>
+        </div>
+
+        <div class="event-details">
+          <div class="detail-item">
+            <i class="fas fa-calendar"></i>
+            <span>{{ formatDateForDisplay(event.startDate) }}</span>
+          </div>
+          <div class="detail-item">
+            <i class="fas fa-calendar-check"></i>
+            <span>{{ formatDateForDisplay(event.endDate) }}</span>
+          </div>
+          <div class="detail-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>{{ event.location }}</span>
+          </div>
+          <div class="detail-item">
+            <i class="fas fa-users"></i>
+            <span>{{ event.currentParticipations }} / {{ event.maxParticipations }} participants</span>
+          </div>
+        </div>
+
+        <div class="event-actions">
+          <button class="btn btn-sm btn-info" (click)="openEditForm(event)">
+            <i class="fas fa-edit"></i> Edit
+          </button>
+          <button class="btn btn-sm btn-danger" (click)="deleteEvent(event.eventId!)">
+            <i class="fas fa-trash"></i> Delete
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="empty-state" *ngIf="events.length === 0 && !loading">
+      <i class="fas fa-calendar-times"></i>
+      <h3>No events found</h3>
+      <p>Create your first event to get started</p>
+      <button class="btn btn-primary" (click)="openCreateForm()">
+        <i class="fas fa-plus"></i> Create Event
+      </button>
+    </div>
+  </div>
+</div>

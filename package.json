@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "@babel/helper-globals": "^7.28.0",
+    "@babel/helper-string-parser": "^7.27.1"
+  }
+}

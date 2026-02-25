@@ -1,0 +1,12 @@
+C:\Users\user\Desktop\pi\Backend\auth-service\src\main\java\com\smartek\authservice\AuthServiceApplication.java
+C:\Users\user\Desktop\pi\Backend\auth-service\src\main\java\com\smartek\authservice\config\SecurityConfig.java
+C:\Users\user\Desktop\pi\Backend\auth-service\src\main\java\com\smartek\authservice\controller\AuthController.java
+C:\Users\user\Desktop\pi\Backend\auth-service\src\main\java\com\smartek\authservice\dto\AuthResponse.java
+C:\Users\user\Desktop\pi\Backend\auth-service\src\main\java\com\smartek\authservice\dto\LoginRequest.java
+C:\Users\user\Desktop\pi\Backend\auth-service\src\main\java\com\smartek\authservice\dto\RegisterRequest.java
+C:\Users\user\Desktop\pi\Backend\auth-service\src\main\java\com\smartek\authservice\entity\User.java
+C:\Users\user\Desktop\pi\Backend\auth-service\src\main\java\com\smartek\authservice\enums\RoleType.java
+C:\Users\user\Desktop\pi\Backend\auth-service\src\main\java\com\smartek\authservice\exception\GlobalExceptionHandler.java
+C:\Users\user\Desktop\pi\Backend\auth-service\src\main\java\com\smartek\authservice\repository\UserRepository.java
+C:\Users\user\Desktop\pi\Backend\auth-service\src\main\java\com\smartek\authservice\service\AuthService.java
+C:\Users\user\Desktop\pi\Backend\auth-service\src\main\java\com\smartek\authservice\service\JwtService.java

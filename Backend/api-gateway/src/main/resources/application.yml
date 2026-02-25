@@ -1,0 +1,82 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    config:
+      enabled: false
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/api/auth/**
+        - id: offers-service
+          uri: lb://offers-service
+          predicates:
+            - Path=/api/offers/**
+        - id: applications-service
+          uri: lb://offers-service
+          predicates:
+            - Path=/api/applications/**
+        - id: interviews-service
+          uri: lb://offers-service
+          predicates:
+            - Path=/api/interviews/**
+        - id: course-service
+          uri: lb://course-service
+          predicates:
+            - Path=/api/courses/**
+        - id: training-service
+          uri: lb://training-service
+          predicates:
+            - Path=/api/trainings/**
+        - id: exam-service
+          uri: lb://exam-service
+          predicates:
+            - Path=/api/exams/**
+        - id: exam-enrollments
+          uri: lb://exam-service
+          predicates:
+            - Path=/api/exam-enrollments/**
+        - id: exam-results
+          uri: lb://exam-service
+          predicates:
+            - Path=/api/exam-results/**
+        - id: training-enrollments
+          uri: lb://training-service
+          predicates:
+            - Path=/api/training-enrollments/**
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowed-origins: "http://localhost:4200"
+            allowed-methods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowed-headers: "*"
+            allow-credentials: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,gateway

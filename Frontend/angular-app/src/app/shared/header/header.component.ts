@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   navbarOpen = false;
   sticky = false;
   userMenuOpen = false;
+  learningPathMenuOpen = false;
   currentUser: AuthResponse | null = null;
 
   constructor(
@@ -90,6 +91,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if (this.userMenuOpen && !target.closest('.user-menu-container')) {
       this.userMenuOpen = false;
     }
+    if (this.learningPathMenuOpen && !target.closest('.learning-path-dropdown')) {
+      this.learningPathMenuOpen = false;
+    }
   }
 
   handleScroll(): void {
@@ -102,6 +106,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   toggleUserMenu(): void {
     this.userMenuOpen = !this.userMenuOpen;
+  }
+
+  toggleLearningPathMenu(): void {
+    this.learningPathMenuOpen = !this.learningPathMenuOpen;
   }
 
   openSignIn(): void {

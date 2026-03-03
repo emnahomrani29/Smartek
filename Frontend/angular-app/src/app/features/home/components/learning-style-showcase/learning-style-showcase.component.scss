@@ -1,0 +1,13 @@
+// Additional styles if needed - most styling is handled by TailwindCSS
+
+// Ensure smooth transitions for focus states
+:host {
+  display: block;
+}
+
+// Enhanced focus visibility for keyboard navigation
+[tabindex="0"]:focus {
+  transform: translateY(-2px);
+}
+
+// Loading spinner animation is handled by Tailwind's animate-spin utility

@@ -1,0 +1,21 @@
+/* Ensure charts are responsive */
+canvas {
+  max-width: 100%;
+  height: auto !important;
+}
+
+/* Animation for cards */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bg-white {
+  animation: fadeInUp 0.5s ease-out;
+}

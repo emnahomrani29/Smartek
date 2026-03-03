@@ -1,0 +1,92 @@
+<div class="relative bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:scale-105 transform">
+  <!-- Decorative gradient overlay -->
+  <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-bl-full"></div>
+  
+  <div class="relative p-6">
+    <!-- Learner Avatar & Name -->
+    <div class="flex items-center mb-5">
+      <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg shadow-md">
+        {{ learningStyle.learnerName.charAt(0).toUpperCase() }}
+      </div>
+      <div class="ml-3">
+        <h3 class="text-lg font-bold text-gray-800">
+          {{ learningStyle.learnerName }}
+        </h3>
+        <p class="text-xs text-gray-500">Learner</p>
+      </div>
+    </div>
+
+    <!-- Preferred Learning Style - Large Badge -->
+    <div class="mb-5 p-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl shadow-md">
+      <div class="flex items-center justify-between text-white">
+        <div class="flex items-center">
+          <span 
+            class="material-icons text-3xl mr-3"
+            [attr.aria-label]="getStyleLabel(learningStyle.preferredStyle)"
+            role="img">
+            {{ getStyleIcon(learningStyle.preferredStyle) }}
+          </span>
+          <div>
+            <p class="text-xs opacity-90 font-medium">Learning Style</p>
+            <p class="font-bold text-base">{{ getStyleLabel(learningStyle.preferredStyle) }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Preferences - Compact Pills -->
+    <div class="space-y-2">
+      <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Preferences</p>
+      
+      <div class="flex flex-wrap gap-2">
+        <!-- Video Preference -->
+        <div 
+          class="flex items-center px-3 py-2 rounded-full text-xs font-medium transition-all duration-200"
+          [class.bg-green-100]="learningStyle.videoPreferred"
+          [class.text-green-700]="learningStyle.videoPreferred"
+          [class.bg-gray-100]="!learningStyle.videoPreferred"
+          [class.text-gray-400]="!learningStyle.videoPreferred">
+          <span 
+            class="material-icons text-sm mr-1"
+            [attr.aria-label]="learningStyle.videoPreferred ? 'Prefers video content' : 'Does not prefer video content'"
+            role="img">
+            videocam
+          </span>
+          <span>Video</span>
+        </div>
+
+        <!-- Text Preference -->
+        <div 
+          class="flex items-center px-3 py-2 rounded-full text-xs font-medium transition-all duration-200"
+          [class.bg-blue-100]="learningStyle.textPreferred"
+          [class.text-blue-700]="learningStyle.textPreferred"
+          [class.bg-gray-100]="!learningStyle.textPreferred"
+          [class.text-gray-400]="!learningStyle.textPreferred">
+          <span 
+            class="material-icons text-sm mr-1"
+            [attr.aria-label]="learningStyle.textPreferred ? 'Prefers text content' : 'Does not prefer text content'"
+            role="img">
+            description
+          </span>
+          <span>Text</span>
+        </div>
+
+        <!-- Practical Work Preference -->
+        <div 
+          class="flex items-center px-3 py-2 rounded-full text-xs font-medium transition-all duration-200"
+          [class.bg-purple-100]="learningStyle.practicalWorkPreferred"
+          [class.text-purple-700]="learningStyle.practicalWorkPreferred"
+          [class.bg-gray-100]="!learningStyle.practicalWorkPreferred"
+          [class.text-gray-400]="!learningStyle.practicalWorkPreferred">
+          <span 
+            class="material-icons text-sm mr-1"
+            [attr.aria-label]="learningStyle.practicalWorkPreferred ? 'Prefers practical work' : 'Does not prefer practical work'"
+            role="img">
+            build
+          </span>
+          <span>Practical</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

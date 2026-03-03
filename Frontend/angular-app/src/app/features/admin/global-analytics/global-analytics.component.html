@@ -1,0 +1,71 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="mb-8 flex justify-between items-center">
+    <div>
+      <h1 class="text-3xl font-bold text-gray-800">Global Analytics</h1>
+      <p class="text-gray-600 mt-2">System-wide performance and trends</p>
+    </div>
+    <button 
+      *ngIf="!loading && analytics"
+      (click)="exportToPDF()"
+      [disabled]="exportingPdf"
+      class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+      <span class="material-icons text-xl">picture_as_pdf</span>
+      <span>{{ exportingPdf ? 'Exporting...' : 'Export PDF' }}</span>
+    </button>
+  </div>
+
+  <div *ngIf="errorMessage" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="loading" class="flex justify-center items-center py-12">
+    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+  </div>
+
+  <div *ngIf="!loading && analytics">
+    <!-- Statistics Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 mb-8">
+      <div class="bg-white rounded-xl shadow-md p-6">
+        <p class="text-gray-500 text-sm font-medium">Total</p>
+        <p class="text-3xl font-bold text-gray-800 mt-2">{{ analytics.totalCount }}</p>
+      </div>
+      <div class="bg-white rounded-xl shadow-md p-6">
+        <p class="text-gray-500 text-sm font-medium">Approved</p>
+        <p class="text-3xl font-bold text-green-600 mt-2">{{ analytics.approvedCount }}</p>
+      </div>
+      <div class="bg-white rounded-xl shadow-md p-6">
+        <p class="text-gray-500 text-sm font-medium">Pending</p>
+        <p class="text-3xl font-bold text-yellow-600 mt-2">{{ analytics.pendingCount }}</p>
+      </div>
+      <div class="bg-white rounded-xl shadow-md p-6">
+        <p class="text-gray-500 text-sm font-medium">Rejected</p>
+        <p class="text-3xl font-bold text-red-600 mt-2">{{ analytics.rejectedCount }}</p>
+      </div>
+      <div class="bg-white rounded-xl shadow-md p-6">
+        <p class="text-gray-500 text-sm font-medium">Approval Rate</p>
+        <p class="text-3xl font-bold text-blue-600 mt-2">{{ getApprovalRateDisplay() }}</p>
+      </div>
+      <div class="bg-white rounded-xl shadow-md p-6">
+        <p class="text-gray-500 text-sm font-medium">Avg Score</p>
+        <p class="text-3xl font-bold text-purple-600 mt-2">{{ getAverageScoreDisplay() }}</p>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+      <div class="bg-white rounded-xl shadow-md p-6">
+        <h2 class="text-xl font-bold text-gray-800 mb-4">Evidence by Category</h2>
+        <div style="height: 300px;"><canvas id="categoryBarChart"></canvas></div>
+      </div>
+      <div class="bg-white rounded-xl shadow-md p-6">
+        <h2 class="text-xl font-bold text-gray-800 mb-4">Status Distribution</h2>
+        <div style="height: 300px;"><canvas id="statusPieChart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-md p-6">
+      <h2 class="text-xl font-bold text-gray-800 mb-4">Submission Trend</h2>
+      <div style="height: 300px;"><canvas id="submissionLineChart"></canvas></div>
+    </div>
+  </div>
+</div>

@@ -89,12 +89,28 @@ export const MENU_ITEMS: MenuItem[] = [
     permissions: [Permission.CERTIFICATIONS_VIEW]
   },
 
-  // Skill Evidence - LEARNER, TRAINER, RH_SMARTEK
+  // Skill Evidence Admin - ADMIN, RH_SMARTEK (voir toutes les preuves)
   {
-    label: 'Skill Evidence',
-    icon: 'psychology',
-    route: '/dashboard/skill-evidence',
-    permissions: [Permission.SKILL_EVIDENCE_VIEW, Permission.SKILL_EVIDENCE_VIEW_ALL]
+    label: 'Skill Evidence ',
+    icon: 'admin_panel_settings',
+    route: '/dashboard/skill-evidence-admin',
+    permissions: [Permission.SKILL_EVIDENCE_VIEW_ALL]
+  },
+
+  // Global Analytics Dashboard - ADMIN
+  {
+    label: 'Global Analytics',
+    icon: 'bar_chart',
+    route: '/dashboard/global-analytics',
+    roles: [Role.ADMIN]
+  },
+
+  // Learning Paths Admin - ADMIN
+  {
+    label: 'Learning Paths ',
+    icon: 'route',
+    route: '/dashboard/learning-path-admin',
+    roles: [Role.ADMIN]
   },
 
   // Interview Management - RH_COMPANY, RH_SMARTEK
@@ -168,15 +184,6 @@ export const MENU_ITEMS: MenuItem[] = [
     route: '/dashboard/participation',
     permissions: [Permission.PARTICIPATION_VIEW, Permission.PARTICIPATION_VIEW_ALL]
   },
-
-  // Learning Path - RH_SMARTEK, LEARNER
-  {
-    label: 'Learning Paths',
-    icon: 'route',
-    route: '/dashboard/learning-paths',
-    permissions: [Permission.LEARNING_PATH_VIEW]
-  },
-
   // Divider
   {
     label: '',

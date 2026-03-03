@@ -6,6 +6,7 @@ import { MentorsComponent } from '../mentors/mentors.component';
 import { TestimonialsComponent } from '../testimonials/testimonials.component';
 import { ContactComponent } from '../contact/contact.component';
 import { NewsletterComponent } from '../newsletter/newsletter.component';
+import { LearningStyleShowcaseComponent } from '../components/learning-style-showcase/learning-style-showcase.component';
 
 @Component({
   selector: 'app-home-page',
@@ -17,7 +18,8 @@ import { NewsletterComponent } from '../newsletter/newsletter.component';
     MentorsComponent,
     TestimonialsComponent,
     ContactComponent,
-    NewsletterComponent
+    NewsletterComponent,
+    LearningStyleShowcaseComponent
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'

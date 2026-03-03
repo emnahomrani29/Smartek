@@ -11,6 +11,38 @@
         {{ item.label }}
         <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-indigo-600 transition-all duration-300 group-hover:w-full"></span>
       </a>
+      
+      <!-- Learning Path Dropdown - Visible uniquement pour LEARNER -->
+      <div *ngIf="isAuthenticated() && isLearner()" class="relative learning-path-dropdown">
+        <button (click)="toggleLearningPathMenu()" class="flex items-center gap-1 text-base font-medium text-gray-700 hover:text-blue-600 transition duration-300 relative group">
+          Learning Path
+          <svg class="w-4 h-4 transition-transform" [class.rotate-180]="learningPathMenuOpen" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+          <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-indigo-600 transition-all duration-300 group-hover:w-full"></span>
+        </button>
+        
+        <!-- Dropdown Menu -->
+        <div *ngIf="learningPathMenuOpen" class="absolute left-0 mt-2 w-56 bg-white rounded-xl shadow-2xl border border-gray-100 py-2 z-50 animate-fade-in-down">
+          <a href="/skill-evidence" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition flex items-center gap-3">
+            <span class="material-icons text-lg">psychology</span>
+            Skill Evidence
+          </a>
+          <a href="/learner-analytics" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition flex items-center gap-3">
+            <span class="material-icons text-lg">analytics</span>
+            My Analytics
+          </a>
+          <a href="/learning-style" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition flex items-center gap-3">
+            <span class="material-icons text-lg">school</span>
+            Learning Style
+          </a>
+          <a href="/learning-path" class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition flex items-center gap-3">
+            <span class="material-icons text-lg">route</span>
+            Learning Path
+          </a>
+        </div>
+      </div>
+      
       <!-- Offres d'Emploi - Visible uniquement pour LEARNER -->
       <a *ngIf="isAuthenticated() && isLearner()" href="/test-offers-learner" class="text-base font-medium text-gray-700 hover:text-blue-600 transition duration-300 relative group">
         📋 Offres d'Emploi
@@ -103,6 +135,34 @@
       <a *ngFor="let item of headerData" [href]="item.href" class="text-base font-medium text-gray-700 hover:text-blue-600 py-2 w-full transition duration-300">
         {{ item.label }}
       </a>
+      
+      <!-- Learning Path Section Mobile - Visible uniquement pour LEARNER -->
+      <div *ngIf="isAuthenticated() && isLearner()" class="w-full">
+        <button (click)="toggleLearningPathMenu()" class="flex items-center justify-between w-full text-base font-medium text-gray-700 hover:text-blue-600 py-2 transition duration-300">
+          <span>Learning Path</span>
+          <svg class="w-4 h-4 transition-transform" [class.rotate-180]="learningPathMenuOpen" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div *ngIf="learningPathMenuOpen" class="ml-4 mt-2 space-y-2">
+          <a href="/skill-evidence" class="block text-sm text-gray-600 hover:text-blue-600 py-2 transition flex items-center gap-2">
+            <span class="material-icons text-base">psychology</span>
+            Skill Evidence
+          </a>
+          <a href="/learner-analytics" class="block text-sm text-gray-600 hover:text-blue-600 py-2 transition flex items-center gap-2">
+            <span class="material-icons text-base">analytics</span>
+            My Analytics
+          </a>
+          <a href="/learning-style" class="block text-sm text-gray-600 hover:text-blue-600 py-2 transition flex items-center gap-2">
+            <span class="material-icons text-base">school</span>
+            Learning Style
+          </a>
+          <a href="/learning-path" class="block text-sm text-gray-600 hover:text-blue-600 py-2 transition flex items-center gap-2">
+            <span class="material-icons text-base">route</span>
+            Learning Path
+          </a>
+        </div>
+      </div>
       
       <!-- Offres d'Emploi Mobile - Visible uniquement pour LEARNER -->
       <a *ngIf="isAuthenticated() && isLearner()" href="/test-offers-learner" class="text-base font-medium text-gray-700 hover:text-blue-600 py-2 w-full transition duration-300">

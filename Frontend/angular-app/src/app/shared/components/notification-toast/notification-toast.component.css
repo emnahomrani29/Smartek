@@ -1,0 +1,122 @@
+.notification-container {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  z-index: 9999;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.notification-toast {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 16px;
+  animation: slideIn 0.3s ease-out;
+  border-left: 4px solid;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.notification-success {
+  border-left-color: #10b981;
+  background: linear-gradient(to right, #f0fdf4, white);
+}
+
+.notification-error {
+  border-left-color: #ef4444;
+  background: linear-gradient(to right, #fef2f2, white);
+}
+
+.notification-info {
+  border-left-color: #3b82f6;
+  background: linear-gradient(to right, #eff6ff, white);
+}
+
+.notification-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.notification-icon {
+  flex-shrink: 0;
+}
+
+.notification-success .notification-icon {
+  color: #10b981;
+}
+
+.notification-error .notification-icon {
+  color: #ef4444;
+}
+
+.notification-info .notification-icon {
+  color: #3b82f6;
+}
+
+.notification-message {
+  flex: 1;
+}
+
+.notification-message p {
+  margin: 0;
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.notification-time {
+  display: block;
+  font-size: 12px;
+  color: #9ca3af;
+  margin-top: 4px;
+}
+
+.notification-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.btn-mark-read,
+.btn-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-mark-read:hover {
+  background-color: #f3f4f6;
+}
+
+.btn-delete:hover {
+  background-color: #fee2e2;
+}
+
+.btn-mark-read .material-icons {
+  font-size: 18px;
+  color: #6b7280;
+}
+
+.btn-delete .material-icons {
+  font-size: 18px;
+  color: #ef4444;
+}

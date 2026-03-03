@@ -1,0 +1,23 @@
+<div class="notification-container">
+  <div *ngFor="let notification of notifications" 
+       [ngClass]="getNotificationClass(notification.type)"
+       class="notification-toast">
+    <div class="notification-content">
+      <div class="notification-icon">
+        <span class="material-icons">{{ getNotificationIcon(notification.type) }}</span>
+      </div>
+      <div class="notification-message">
+        <p>{{ notification.message }}</p>
+        <span class="notification-time">{{ notification.createdAt | date:'short' }}</span>
+      </div>
+      <div class="notification-actions">
+        <button (click)="markAsRead(notification)" class="btn-mark-read" title="Mark as read">
+          <span class="material-icons">done</span>
+        </button>
+        <button (click)="deleteNotification(notification)" class="btn-delete" title="Delete">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

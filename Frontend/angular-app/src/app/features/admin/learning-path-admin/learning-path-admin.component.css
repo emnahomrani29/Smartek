@@ -1,0 +1,21 @@
+/* Hover effect pour les lignes du tableau */
+tbody tr:hover {
+  background-color: #e3f2fd !important;
+  cursor: pointer;
+}
+
+/* Animation pour les statistiques */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+div[style*="linear-gradient"] {
+  animation: fadeInUp 0.5s ease-out;
+}

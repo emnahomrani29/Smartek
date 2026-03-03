@@ -1,0 +1,213 @@
+<div style="max-width: 1400px; margin: 0 auto; padding: 20px;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+    <div>
+      <h1 style="font-size: 28px; font-weight: bold; color: #333; margin-bottom: 10px;">My Learning Paths</h1>
+      <p style="color: #666;">Manage your learning paths and track your progress</p>
+    </div>
+    <button (click)="openAddModal()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+      <span class="material-icons">add</span>
+      <span>New Path</span>
+    </button>
+  </div>
+
+  <div *ngIf="successMessage" style="background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724; padding: 12px; border-radius: 4px; margin-bottom: 20px;">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage && !showModal" style="background-color: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; padding: 12px; border-radius: 4px; margin-bottom: 20px;">
+    {{ errorMessage }}
+  </div>
+
+  <div style="margin-bottom: 20px;">
+    <input type="text" 
+           [(ngModel)]="searchTerm" 
+           placeholder="Search for a path..." 
+           style="width: 100%; max-width: 400px; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px;">
+  </div>
+
+  <div *ngIf="loading && !showModal" style="text-align: center; padding: 50px;">
+    <p style="color: #666;">Loading...</p>
+  </div>
+
+  <div *ngIf="!loading && filteredPaths.length === 0 && !searchTerm" style="text-align: center; padding: 50px;">
+    <div style="max-width: 500px; margin: 0 auto;">
+      <div style="width: 120px; height: 120px; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 30px;">
+        <span class="material-icons" style="font-size: 60px; color: #667eea;">route</span>
+      </div>
+      <h3 style="font-size: 24px; font-weight: 600; color: #333; margin-bottom: 15px;">No learning paths</h3>
+      <p style="color: #666; margin-bottom: 30px;">Start your learning journey by creating your first path</p>
+      <button (click)="openAddModal()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 30px; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <span class="material-icons">add</span>
+        <span>Create my first path</span>
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && filteredPaths.length === 0 && searchTerm" style="text-align: center; padding: 50px;">
+    <p style="color: #666;">No paths found for "{{ searchTerm }}"</p>
+  </div>
+
+  <div *ngIf="!loading && filteredPaths.length > 0" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px;">
+    <div *ngFor="let path of filteredPaths" style="background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s;">
+      <div style="padding: 20px; border-bottom: 1px solid #f0f0f0;">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
+          <h3 style="font-size: 18px; font-weight: 600; color: #333; margin: 0; flex: 1;">{{ path.title }}</h3>
+          <span [style.background-color]="getStatusColor(path.status)" style="color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 500; white-space: nowrap; margin-left: 10px;">
+            {{ getStatusLabel(path.status) }}
+          </span>
+        </div>
+        <p style="color: #666; font-size: 14px; margin: 0; line-height: 1.5;">{{ path.description || 'No description' }}</p>
+      </div>
+
+      <div style="padding: 20px;">
+        <div style="margin-bottom: 15px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-size: 14px; color: #666;">Progress</span>
+            <span style="font-size: 16px; font-weight: 600;" [style.color]="getProgressColor(path.progress)">{{ path.progress }}%</span>
+          </div>
+          <div style="width: 100%; height: 8px; background-color: #e0e0e0; border-radius: 4px; overflow: hidden;">
+            <div [style.width.%]="path.progress" [style.background-color]="getProgressColor(path.progress)" style="height: 100%; transition: width 0.3s;"></div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 15px;">
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #666;">
+            <span class="material-icons" style="font-size: 18px;">event</span>
+            <span>Start: {{ formatDate(path.startDate) }}</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #666;">
+            <span class="material-icons" style="font-size: 18px;">event_available</span>
+            <span>End: {{ formatDate(path.endDate) }}</span>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 10px; padding-top: 15px; border-top: 1px solid #f0f0f0;">
+          <button (click)="openEditModal(path)" style="flex: 1; background-color: #e3f2fd; color: #1976d2; padding: 10px; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 6px;">
+            <span class="material-icons" style="font-size: 18px;">edit</span>
+            <span>Edit</span>
+          </button>
+          <button (click)="deletePath(path.pathId, path.title)" style="flex: 1; background-color: #ffebee; color: #c62828; padding: 10px; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 6px;">
+            <span class="material-icons" style="font-size: 18px;">delete</span>
+            <span>Delete</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showModal" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px;">
+    <div style="background: white; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); max-width: 600px; width: 100%; max-height: 90vh; overflow-y: auto;">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #e0e0e0;">
+        <h2 style="font-size: 22px; font-weight: bold; color: #333; margin: 0;">
+          {{ isEditMode ? 'Edit Path' : 'New Path' }}
+        </h2>
+        <button (click)="closeModal()" style="background: none; border: none; cursor: pointer; color: #999; padding: 5px;">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+
+      <div style="padding: 20px;">
+        <div *ngIf="successMessage" style="background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724; padding: 12px; border-radius: 4px; margin-bottom: 20px;">
+          {{ successMessage }}
+        </div>
+        <div *ngIf="errorMessage" style="background-color: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; padding: 12px; border-radius: 4px; margin-bottom: 20px;">
+          {{ errorMessage }}
+        </div>
+
+        <form (ngSubmit)="savePath()">
+          <div style="margin-bottom: 20px;">
+            <label style="display: block; font-size: 14px; font-weight: 600; color: #333; margin-bottom: 8px;">
+              Title <span style="color: #dc3545;">*</span>
+            </label>
+            <input type="text" 
+                   [(ngModel)]="currentPath.title" 
+                   name="title" 
+                   placeholder="Ex: Java Spring Boot Path"
+                   style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px;">
+          </div>
+
+          <div style="margin-bottom: 20px;">
+            <label style="display: block; font-size: 14px; font-weight: 600; color: #333; margin-bottom: 8px;">
+              Description
+            </label>
+            <textarea [(ngModel)]="currentPath.description" 
+                      name="description" 
+                      rows="3"
+                      placeholder="Describe your learning path..."
+                      style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; resize: vertical;"></textarea>
+          </div>
+
+          <div style="margin-bottom: 20px;">
+            <label style="display: block; font-size: 14px; font-weight: 600; color: #333; margin-bottom: 8px;">
+              Status <span style="color: #dc3545;">*</span>
+            </label>
+            <select [(ngModel)]="currentPath.status" 
+                    name="status"
+                    style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px;">
+              <option *ngFor="let status of pathStatuses" [value]="status">{{ getStatusLabel(status) }}</option>
+            </select>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+            <div>
+              <label style="display: block; font-size: 14px; font-weight: 600; color: #333; margin-bottom: 8px;">
+                Start Date <span style="color: #dc3545;">*</span>
+              </label>
+              <input type="date" 
+                     [(ngModel)]="currentPath.startDate" 
+                     name="startDate"
+                     style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px;">
+            </div>
+            <div>
+              <label style="display: block; font-size: 14px; font-weight: 600; color: #333; margin-bottom: 8px;">
+                End Date
+              </label>
+              <input type="date" 
+                     [(ngModel)]="currentPath.endDate" 
+                     name="endDate"
+                     style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px;">
+            </div>
+          </div>
+
+          <div style="margin-bottom: 20px;">
+            <label style="display: block; font-size: 14px; font-weight: 600; color: #333; margin-bottom: 8px;">
+              Progress (%) <span style="color: #dc3545;">*</span>
+            </label>
+            <div style="display: flex; align-items: center; gap: 15px;">
+              <input type="range" 
+                     [(ngModel)]="currentPath.progress" 
+                     name="progress"
+                     min="0" 
+                     max="100"
+                     style="flex: 1;">
+              <input type="number" 
+                     [(ngModel)]="currentPath.progress" 
+                     name="progressNumber"
+                     min="0" 
+                     max="100"
+                     style="width: 80px; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; text-align: center;">
+            </div>
+            <div style="width: 100%; height: 8px; background-color: #e0e0e0; border-radius: 4px; overflow: hidden; margin-top: 10px;">
+              <div [style.width.%]="currentPath.progress" [style.background-color]="getProgressColor(currentPath.progress)" style="height: 100%; transition: width 0.3s;"></div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 12px; padding-top: 15px;">
+            <button type="button" 
+                    (click)="closeModal()" 
+                    style="flex: 1; padding: 12px 24px; border: 1px solid #ccc; background: white; color: #333; border-radius: 6px; cursor: pointer; font-size: 16px;">
+              Cancel
+            </button>
+            <button type="submit" 
+                    [disabled]="loading" 
+                    [style.opacity]="loading ? '0.5' : '1'"
+                    [style.cursor]="loading ? 'not-allowed' : 'pointer'"
+                    style="flex: 1; padding: 12px 24px; border: none; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 6px; font-size: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+              <span *ngIf="!loading">{{ isEditMode ? 'Update' : 'Create' }}</span>
+              <span *ngIf="loading">Loading...</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -243,6 +243,11 @@ export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
     Permission.PARTICIPATION_MANAGE,
     Permission.PARTICIPATION_EXPORT,
     
+    // Skill Evidence Management
+    Permission.SKILL_EVIDENCE_VIEW_ALL,
+    Permission.SKILL_EVIDENCE_VALIDATE,
+    Permission.SKILL_EVIDENCE_MANAGE,
+    
     // System Settings
     Permission.SYSTEM_SETTINGS,
     Permission.SYSTEM_LOGS,

@@ -1,0 +1,42 @@
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Status Badge Styles */
+.badge-warning {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.badge-success {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.badge-danger {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.badge-secondary {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+/* Animation pour le chargement */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Hover effect pour les lignes du tableau */
+tbody tr {
+  transition: background-color 0.2s ease;
+}

@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8082/api'  // Direct vers le service, sans passer par le Gateway
+  apiUrl: 'http://localhost:8089/api',  // Port du skill-evidence-service
+  learningApiUrl: 'http://localhost:8090/api'  // Port du learning service
 };

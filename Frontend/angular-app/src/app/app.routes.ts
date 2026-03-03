@@ -23,6 +23,29 @@ export const routes: Routes = [
   { path: 'test-offers', component: JobOffersComponent }, // Route de test sans guards
   { path: 'test-offers-learner', component: JobOffersLearnerComponent }, // Route de test pour learner
   { path: 'test-interviews-learner', component: InterviewsLearnerComponent }, // Route de test pour entretiens learner
+  
+  // Routes Learning Path avec navbar et footer (hors dashboard)
+  { 
+    path: 'skill-evidence', 
+    loadComponent: () => import('./features/learner-pages/skill-evidence-page/skill-evidence-page.component').then(m => m.SkillEvidencePageComponent),
+    canActivate: [authGuard]
+  },
+  { 
+    path: 'learner-analytics', 
+    loadComponent: () => import('./features/learner-pages/learner-analytics-page/learner-analytics-page.component').then(m => m.LearnerAnalyticsPageComponent),
+    canActivate: [authGuard]
+  },
+  { 
+    path: 'learning-style', 
+    loadComponent: () => import('./features/learner-pages/learning-style-page/learning-style-page.component').then(m => m.LearningStylePageComponent),
+    canActivate: [authGuard]
+  },
+  { 
+    path: 'learning-path', 
+    loadComponent: () => import('./features/learner-pages/learning-path-page/learning-path-page.component').then(m => m.LearningPathPageComponent),
+    canActivate: [authGuard]
+  },
+  
   { 
     path: 'dashboard', 
     component: DashboardLayoutComponent,
@@ -97,9 +120,49 @@ export const routes: Routes = [
       // Skill Evidence
       { 
         path: 'skill-evidence', 
-        component: DashboardPageComponent,
+        loadComponent: () => import('./features/learner/skill-evidence/skill-evidence.component').then(m => m.SkillEvidenceComponent),
         canActivate: [permissionGuard],
         data: { permissions: [Permission.SKILL_EVIDENCE_VIEW, Permission.SKILL_EVIDENCE_VIEW_ALL] }
+      },
+      // Learner Analytics Dashboard - LEARNER
+      { 
+        path: 'learner-analytics', 
+        loadComponent: () => import('./features/learner/learner-analytics/learner-analytics.component').then(m => m.LearnerAnalyticsComponent),
+        canActivate: [permissionGuard],
+        data: { roles: [Role.LEARNER] }
+      },
+      // Skill Evidence Admin - Vue pour tous les apprenants
+      { 
+        path: 'skill-evidence-admin', 
+        loadComponent: () => import('./features/admin/skill-evidence-admin/skill-evidence-admin.component').then(m => m.SkillEvidenceAdminComponent),
+        canActivate: [permissionGuard],
+        data: { permissions: [Permission.SKILL_EVIDENCE_VIEW_ALL] }
+      },
+      // Global Analytics Dashboard - ADMIN
+      { 
+        path: 'global-analytics', 
+        loadComponent: () => import('./features/admin/global-analytics/global-analytics.component').then(m => m.GlobalAnalyticsComponent),
+        canActivate: [permissionGuard],
+        data: { roles: [Role.ADMIN] }
+      },
+      // Learning Path Admin - Vue pour tous les apprenants
+      { 
+        path: 'learning-path-admin', 
+        loadComponent: () => import('./features/admin/learning-path-admin/learning-path-admin.component').then(m => m.LearningPathAdminComponent),
+        canActivate: [permissionGuard],
+        data: { roles: [Role.ADMIN] }
+      },
+      // Learning Style - Tous les utilisateurs
+      { 
+        path: 'learning-style', 
+        loadComponent: () => import('./features/learner/learning-style/learning-style.component').then(m => m.LearningStyleComponent)
+      },
+      // Learning Path - LEARNER
+      { 
+        path: 'learning-path', 
+        loadComponent: () => import('./features/learner/learning-path/learning-path.component').then(m => m.LearningPathComponent),
+        canActivate: [permissionGuard],
+        data: { roles: [Role.LEARNER] }
       },
       // Interview Management
       { 

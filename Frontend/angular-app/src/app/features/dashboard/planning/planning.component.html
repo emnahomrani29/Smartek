@@ -86,10 +86,6 @@
               <span>📅</span>
               {{ interview.interviewDate | date:'dd/MM/yyyy à HH:mm' }}
             </p>
-            <p class="flex items-center gap-2">
-              <span>📍</span>
-              {{ interview.location }}
-            </p>
             <p *ngIf="interview.meetingLink" class="flex items-center gap-2">
               <span>🔗</span>
               <a [href]="interview.meetingLink" target="_blank" class="text-blue-600 hover:underline">

@@ -1,0 +1,43 @@
+╔═══════════════════════════════════════════════════════════════╗
+║                    SOLUTION RAPIDE                            ║
+║                                                               ║
+║  Le service offers-service fonctionne MAIS la base de         ║
+║  données a besoin d'une correction                            ║
+╚═══════════════════════════════════════════════════════════════╝
+
+ÉTAPE 1: Ouvrir MySQL Workbench
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  → Lancez MySQL Workbench
+  → Connectez-vous à votre serveur local
+
+
+ÉTAPE 2: Exécuter ce script SQL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  USE offers_db;
+  
+  ALTER TABLE applications 
+  MODIFY COLUMN applied_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
+  
+  DESCRIBE applications;
+
+
+ÉTAPE 3: Redémarrer offers-service
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  → Dans le terminal PowerShell: Ctrl+C
+  → Puis: mvn spring-boot:run
+
+
+ÉTAPE 4: Tester
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  → http://localhost:4200
+  → Connexion LEARNER
+  → Soumettre une candidature
+  → ✅ Succès!
+
+
+FICHIERS DISPONIBLES:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  • fix-applications-complete.sql  (script SQL complet)
+  • EXECUTER_MAINTENANT.md         (guide détaillé)
+  • check-services.ps1             (vérifier les services)

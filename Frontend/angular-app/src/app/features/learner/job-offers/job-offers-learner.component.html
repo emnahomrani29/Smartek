@@ -25,7 +25,7 @@
 
   <!-- Filters -->
   <div class="bg-white rounded-lg shadow p-4 mb-6">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
       <!-- Search -->
       <div>
         <label class="block text-sm font-semibold text-gray-700 mb-2">Rechercher</label>
@@ -35,20 +35,6 @@
           (ngModelChange)="onSearchChange()"
           placeholder="Titre, entreprise, localisation..."
           class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-      </div>
-
-      <!-- Status Filter -->
-      <div>
-        <label class="block text-sm font-semibold text-gray-700 mb-2">Statut</label>
-        <select 
-          [(ngModel)]="filterStatus" 
-          (change)="onFilterChange()"
-          class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-          <option value="ALL">Tous</option>
-          <option value="ACTIVE">Actif</option>
-          <option value="CLOSED">Fermé</option>
-          <option value="DRAFT">Brouillon</option>
-        </select>
       </div>
 
       <!-- Contract Type Filter -->
@@ -68,7 +54,7 @@
       <div class="flex items-end">
         <div class="text-gray-600">
           <span class="font-semibold text-2xl text-blue-600">{{ filteredOffers.length }}</span>
-          <span class="ml-2">offre(s) disponible(s)</span>
+          <span class="ml-2">offre(s) active(s)</span>
         </div>
       </div>
     </div>

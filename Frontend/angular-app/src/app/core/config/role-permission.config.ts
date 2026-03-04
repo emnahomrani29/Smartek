@@ -73,14 +73,6 @@ export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
   ],
 
   [Role.RH_COMPANY]: [
-    // Interview Management
-    Permission.INTERVIEWS_VIEW,
-    Permission.INTERVIEWS_CREATE,
-    Permission.INTERVIEWS_EDIT,
-    Permission.INTERVIEWS_DELETE,
-    Permission.INTERVIEWS_SCHEDULE,
-    Permission.INTERVIEWS_UPDATE_STATUS,
-    
     // Planning/Schedule
     Permission.PLANNING_VIEW,
     Permission.PLANNING_CREATE,
@@ -103,10 +95,6 @@ export const ROLE_PERMISSIONS: Record<Role, Permission[]> = {
     // Company (own company only)
     Permission.COMPANY_VIEW,
     Permission.COMPANY_EDIT,
-    
-    // Users (limited to candidates)
-    Permission.USERS_VIEW,
-    Permission.USERS_VIEW_PROFILES,
     
     // Profile
     Permission.PROFILE_VIEW,

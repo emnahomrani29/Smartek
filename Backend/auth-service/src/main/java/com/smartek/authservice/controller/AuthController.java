@@ -80,4 +80,16 @@ public class AuthController {
                             .build());
         }
     }
+    
+    @GetMapping("/users/role/{role}")
+    public ResponseEntity<Long[]> getUserIdsByRole(@PathVariable String role) {
+        log.info("Récupération des IDs utilisateurs avec le rôle: {}", role);
+        try {
+            Long[] userIds = authService.getUserIdsByRole(role);
+            return ResponseEntity.ok(userIds);
+        } catch (Exception e) {
+            log.error("Erreur lors de la récupération des utilisateurs par rôle: {}", e.getMessage());
+            return ResponseEntity.ok(new Long[0]);
+        }
+    }
 }

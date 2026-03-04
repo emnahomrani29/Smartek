@@ -1,0 +1,84 @@
+<div class="notification-bell-container">
+  <!-- Bell Icon -->
+  <button 
+    (click)="toggleDropdown()"
+    class="notification-bell-button">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+    </svg>
+    
+    <!-- Badge for unread count -->
+    <span *ngIf="unreadCount > 0" class="notification-badge">
+      {{ unreadCount > 99 ? '99+' : unreadCount }}
+    </span>
+    
+    <!-- Debug info - Remove after testing -->
+    <span style="position: absolute; top: -20px; right: 0; font-size: 10px; color: red;">
+      {{ notifications.length }}
+    </span>
+  </button>
+
+  <!-- Dropdown -->
+  <div *ngIf="showDropdown" class="notification-dropdown">
+    <!-- Header -->
+    <div class="notification-header">
+      <h3 class="notification-title">Notifications</h3>
+      <button 
+        *ngIf="unreadCount > 0"
+        (click)="markAllAsRead()"
+        class="mark-all-read-btn">
+        Tout marquer comme lu
+      </button>
+    </div>
+
+    <!-- Notifications List -->
+    <div class="notification-list">
+      <div *ngIf="notifications.length === 0" class="no-notifications">
+        <svg class="w-12 h-12 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
+        </svg>
+        <p class="text-gray-500">Aucune notification</p>
+      </div>
+
+      <div 
+        *ngFor="let notification of notifications"
+        (click)="markAsRead(notification)"
+        [class.unread]="!notification.isRead"
+        class="notification-item">
+        
+        <!-- Icon based on type -->
+        <div class="notification-icon">
+          <svg *ngIf="notification.type === 'NEW_OFFER'" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+            <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
+          </svg>
+        </div>
+
+        <!-- Content -->
+        <div class="notification-content">
+          <p class="notification-text">{{ notification.message }}</p>
+          <span class="notification-time">{{ getTimeAgo(notification.createdAt) }}</span>
+        </div>
+
+        <!-- Unread indicator -->
+        <div *ngIf="!notification.isRead" class="unread-indicator"></div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="notification-footer">
+      <a routerLink="/learner/job-offers" (click)="showDropdown = false" class="view-all-link">
+        Voir toutes les offres
+      </a>
+    </div>
+  </div>
+
+  <!-- Backdrop -->
+  <div 
+    *ngIf="showDropdown" 
+    (click)="toggleDropdown()"
+    class="notification-backdrop">
+  </div>
+</div>

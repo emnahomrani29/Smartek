@@ -6,9 +6,11 @@ import { JobOffersRouterComponent } from './features/dashboard/job-offers-router
 import { JobOffersComponent } from './features/dashboard/job-offers/job-offers.component';
 import { JobOffersLearnerComponent } from './features/learner/job-offers/job-offers-learner.component';
 import { InterviewsLearnerComponent } from './features/learner/interviews/interviews-learner.component';
+import { TestNotificationsComponent } from './features/learner/test-notifications/test-notifications.component';
 import { PlanningComponent } from './features/dashboard/planning/planning.component';
 import { SignUpComponent } from './features/auth/sign-up/sign-up.component';
 import { SignInComponent } from './features/auth/sign-in/sign-in.component';
+import { Oauth2SuccessComponent } from './features/auth/oauth2-success/oauth2-success.component';
 import { SettingsComponent } from './features/settings/settings.component';
 import { authGuard } from './core/guards/auth.guard';
 import { permissionGuard } from './core/guards/permission.guard';
@@ -19,10 +21,12 @@ export const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'auth/sign-in', component: SignInComponent },
   { path: 'auth/sign-up', component: SignUpComponent },
+  { path: 'auth/oauth2/success', component: Oauth2SuccessComponent },
   { path: 'settings', component: SettingsComponent, canActivate: [authGuard] },
   { path: 'test-offers', component: JobOffersComponent }, // Route de test sans guards
   { path: 'test-offers-learner', component: JobOffersLearnerComponent }, // Route de test pour learner
   { path: 'test-interviews-learner', component: InterviewsLearnerComponent }, // Route de test pour entretiens learner
+  { path: 'test-notifications', component: TestNotificationsComponent }, // Route de test pour notifications
   { 
     path: 'dashboard', 
     component: DashboardLayoutComponent,
@@ -34,7 +38,7 @@ export const routes: Routes = [
       },
       { 
         path: 'profile', 
-        component: DashboardPageComponent,
+        loadComponent: () => import('./features/dashboard/profile/profile.component').then(m => m.ProfileComponent),
         canActivate: [permissionGuard],
         data: { permissions: [Permission.PROFILE_VIEW] }
       },

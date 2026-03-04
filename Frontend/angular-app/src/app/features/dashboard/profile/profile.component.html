@@ -1,0 +1,176 @@
+<div class="min-h-screen bg-gray-50 py-8">
+  <div class="max-w-4xl mx-auto px-4">
+    <!-- Header -->
+    <div class="mb-6">
+      <button (click)="goBack()" class="flex items-center text-gray-600 hover:text-primary transition mb-4">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Retour au Dashboard
+      </button>
+      <h1 class="text-3xl font-bold text-gray-900">Mon Profil</h1>
+      <p class="text-gray-600 mt-2">Gérez vos informations personnelles</p>
+    </div>
+
+    <!-- Profile Card -->
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+      <!-- Header with gradient -->
+      <div class="bg-gradient-to-r from-primary to-accent h-32"></div>
+      
+      <!-- Profile Content -->
+      <div class="px-8 pb-8">
+        <!-- Avatar -->
+        <div class="flex items-end -mt-16 mb-6">
+          <div class="relative">
+            <div class="w-32 h-32 rounded-full bg-white p-2 shadow-xl">
+              <div class="w-full h-full rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center overflow-hidden">
+                <img *ngIf="getUserImage()" [src]="getUserImage()" alt="User avatar" class="w-full h-full object-cover">
+                <span *ngIf="!getUserImage()" class="text-white text-4xl font-bold">{{ getUserInitial() }}</span>
+              </div>
+            </div>
+            <button class="absolute bottom-0 right-0 bg-white rounded-full p-2 shadow-lg hover:bg-gray-50 transition">
+              <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </button>
+          </div>
+          
+          <div class="ml-6 flex-1">
+            <h2 class="text-2xl font-bold text-gray-900">{{ currentUser?.firstName }}</h2>
+            <p class="text-gray-600">{{ currentUser?.email }}</p>
+            <span class="inline-block mt-2 px-4 py-1 bg-gradient-to-r from-primary/10 to-accent/10 text-primary rounded-full text-sm font-semibold">
+              {{ formatRole(currentUser?.role) }}
+            </span>
+          </div>
+
+          <button 
+            *ngIf="!isEditing"
+            (click)="toggleEdit()" 
+            class="bg-gradient-to-r from-primary to-accent text-white px-6 py-2 rounded-lg hover:shadow-lg transition flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+            </svg>
+            Modifier
+          </button>
+        </div>
+
+        <!-- Divider -->
+        <div class="border-t border-gray-200 my-6"></div>
+
+        <!-- Information Section -->
+        <div class="space-y-6">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Informations Personnelles</h3>
+
+          <!-- View Mode -->
+          <div *ngIf="!isEditing" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Prénom -->
+            <div class="bg-gray-50 rounded-lg p-4">
+              <label class="text-sm font-medium text-gray-500 block mb-1">Prénom</label>
+              <p class="text-gray-900 font-medium">{{ currentUser?.firstName || 'Non renseigné' }}</p>
+            </div>
+
+            <!-- Email -->
+            <div class="bg-gray-50 rounded-lg p-4">
+              <label class="text-sm font-medium text-gray-500 block mb-1">Email</label>
+              <p class="text-gray-900 font-medium">{{ currentUser?.email || 'Non renseigné' }}</p>
+            </div>
+
+            <!-- Rôle -->
+            <div class="bg-gray-50 rounded-lg p-4">
+              <label class="text-sm font-medium text-gray-500 block mb-1">Rôle</label>
+              <p class="text-gray-900 font-medium">{{ formatRole(currentUser?.role) }}</p>
+            </div>
+
+            <!-- Expérience -->
+            <div class="bg-gray-50 rounded-lg p-4">
+              <label class="text-sm font-medium text-gray-500 block mb-1">Expérience</label>
+              <p class="text-gray-900 font-medium">{{ currentUser?.experience || 0 }} ans</p>
+            </div>
+
+          <!-- Edit Mode -->
+          <div *ngIf="isEditing" class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Prénom -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Prénom</label>
+                <input 
+                  type="text" 
+                  [(ngModel)]="editForm.firstName"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  placeholder="Votre prénom">
+              </div>
+
+              <!-- Email -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                <input 
+                  type="email" 
+                  [(ngModel)]="editForm.email"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  placeholder="votre@email.com">
+              </div>
+
+              <!-- Expérience -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Expérience (années)</label>
+                <input 
+                  type="number" 
+                  [(ngModel)]="editForm.experience"
+                  min="0"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  placeholder="0">
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex gap-4 pt-4">
+              <button 
+                (click)="saveProfile()"
+                class="bg-gradient-to-r from-primary to-accent text-white px-6 py-2 rounded-lg hover:shadow-lg transition flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                Enregistrer
+              </button>
+              <button 
+                (click)="cancelEdit()"
+                class="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-300 transition">
+                Annuler
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="border-t border-gray-200 my-6"></div>
+
+        <!-- Security Section -->
+        <div class="space-y-4">
+          <h3 class="text-xl font-semibold text-gray-900 mb-4">Sécurité</h3>
+          
+          <button class="w-full md:w-auto bg-white border-2 border-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-50 transition flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
+            </svg>
+            Changer le mot de passe
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional Info Card -->
+    <div class="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-start gap-3">
+      <svg class="w-6 h-6 text-blue-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+      <div>
+        <h4 class="font-semibold text-blue-900 mb-1">Informations importantes</h4>
+        <p class="text-sm text-blue-800">
+          Vos informations personnelles sont sécurisées et ne seront jamais partagées sans votre consentement.
+          Pour toute modification de votre rôle, veuillez contacter un administrateur.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

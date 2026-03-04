@@ -4,11 +4,12 @@ import { Router } from '@angular/router';
 import { DataService } from '../../core/services/data.service';
 import { MenuItem } from '../../core/models/menu.model';
 import { AuthService, AuthResponse } from '../../core/services/auth.service';
+import { NotificationBellSimpleComponent } from '../components/notification-bell/notification-bell-simple.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NotificationBellSimpleComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -136,6 +137,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   isLearner(): boolean {
     return this.currentUser?.role === 'LEARNER';
+  }
+
+  canAccessDashboard(): boolean {
+    return this.currentUser?.role === 'RH_COMPANY' || this.currentUser?.role === 'ADMIN';
   }
 
   getUserInitial(): string {

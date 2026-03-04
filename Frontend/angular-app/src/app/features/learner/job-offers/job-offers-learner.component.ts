@@ -21,7 +21,6 @@ export class JobOffersLearnerComponent implements OnInit {
   showDetailModal = false;
   showApplicationModal = false;
   
-  filterStatus = 'ALL';
   filterContractType = 'ALL';
   searchTerm = '';
   
@@ -105,24 +104,24 @@ export class JobOffersLearnerComponent implements OnInit {
 
   applyFilters() {
     console.log('Learner: Applying filters...', {
-      filterStatus: this.filterStatus,
       filterContractType: this.filterContractType,
       searchTerm: this.searchTerm,
       totalOffers: this.offers.length
     });
     
     this.filteredOffers = this.offers.filter(offer => {
-      const statusMatch = this.filterStatus === 'ALL' || offer.status === this.filterStatus;
+      // Afficher uniquement les offres actives pour les learners
+      const isActive = offer.status === 'ACTIVE';
       const contractMatch = this.filterContractType === 'ALL' || offer.contractType === this.filterContractType;
       const searchMatch = this.searchTerm === '' || 
         offer.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
         offer.companyName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
         offer.location.toLowerCase().includes(this.searchTerm.toLowerCase());
       
-      return statusMatch && contractMatch && searchMatch;
+      return isActive && contractMatch && searchMatch;
     });
     
-    console.log('Learner: Filtered result:', this.filteredOffers.length, 'offers');
+    console.log('Learner: Filtered result:', this.filteredOffers.length, 'active offers');
   }
 
   onFilterChange() {

@@ -148,4 +148,12 @@ public class AuthService {
             return null;
         }
     }
+    
+    public Long[] getUserIdsByRole(String roleName) {
+        log.info("Récupération des IDs utilisateurs avec le rôle: {}", roleName);
+        return userRepository.findAll().stream()
+                .filter(user -> user.getRole().name().equals(roleName))
+                .map(User::getUserId)
+                .toArray(Long[]::new);
+    }
 }

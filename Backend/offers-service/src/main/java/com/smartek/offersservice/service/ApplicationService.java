@@ -19,8 +19,27 @@ public class ApplicationService {
     
     @Transactional
     public ApplicationResponse applyToOffer(ApplicationRequest request) {
+        System.out.println("=== APPLICATION SUBMISSION ===");
+        System.out.println("Offer ID: " + request.getOfferId());
+        System.out.println("Learner ID: " + request.getLearnerId());
+        System.out.println("Learner Name: " + request.getLearnerName());
+        System.out.println("Learner Email: " + request.getLearnerEmail());
+        
+        // Vérifier que les IDs ne sont pas null
+        if (request.getOfferId() == null || request.getLearnerId() == null) {
+            System.out.println("ERROR: Offer ID or Learner ID is null!");
+            throw new RuntimeException("Les identifiants de l'offre et de l'apprenant sont requis");
+        }
+        
         // Vérifier si l'utilisateur a déjà postulé
-        if (applicationRepository.existsByOfferIdAndLearnerId(request.getOfferId(), request.getLearnerId())) {
+        boolean alreadyApplied = applicationRepository.existsByOfferIdAndLearnerId(
+            request.getOfferId(), 
+            request.getLearnerId()
+        );
+        System.out.println("Already applied check: " + alreadyApplied);
+        
+        if (alreadyApplied) {
+            System.out.println("ERROR: User has already applied to this offer");
             throw new RuntimeException("Vous avez déjà postulé à cette offre");
         }
         
@@ -35,6 +54,7 @@ public class ApplicationService {
         application.setStatus("PENDING");
         
         Application savedApplication = applicationRepository.save(application);
+        System.out.println("Application saved successfully with ID: " + savedApplication.getId());
         return mapToResponse(savedApplication);
     }
     

@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 public class OfferService {
     
     private final OfferRepository offerRepository;
+    private final NotificationService notificationService;
     
     @Transactional
     public OfferResponse createOffer(OfferRequest request) {
@@ -30,6 +31,23 @@ public class OfferService {
         offer.setStatus(request.getStatus() != null ? request.getStatus() : "ACTIVE");
         
         Offer savedOffer = offerRepository.save(offer);
+        System.out.println("=== OFFER CREATED ===");
+        System.out.println("Offer ID: " + savedOffer.getId());
+        System.out.println("Offer Title: " + savedOffer.getTitle());
+        System.out.println("Offer Status: " + savedOffer.getStatus());
+        
+        // Notifier les learners si l'offre est active
+        if ("ACTIVE".equals(savedOffer.getStatus())) {
+            System.out.println("=== CALLING NOTIFICATION SERVICE ===");
+            notificationService.notifyLearnersAboutNewOffer(
+                savedOffer.getId(), 
+                savedOffer.getTitle(), 
+                savedOffer.getCompanyName()
+            );
+        } else {
+            System.out.println("=== OFFER NOT ACTIVE, NO NOTIFICATION ===");
+        }
+        
         return mapToResponse(savedOffer);
     }
     

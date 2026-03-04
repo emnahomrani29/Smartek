@@ -123,4 +123,38 @@ export class AuthService {
       })
     );
   }
+
+  // OAuth2 Methods
+  loginWithGoogle(): void {
+    const clientId = '708781915546-i6vd4l88tdipk7072ehigjtrg12belms.apps.googleusercontent.com';
+    const redirectUri = 'http://localhost:8081/api/auth/oauth2/callback/google';
+    const scope = 'email profile';
+    const responseType = 'code';
+    
+    console.log('Google OAuth - Client ID:', clientId);
+    console.log('Google OAuth - Redirect URI:', redirectUri);
+    
+    const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?` +
+      `client_id=${clientId}&` +
+      `redirect_uri=${encodeURIComponent(redirectUri)}&` +
+      `response_type=${responseType}&` +
+      `scope=${encodeURIComponent(scope)}`;
+    
+    console.log('Google OAuth - Auth URL:', authUrl);
+    
+    window.location.href = authUrl;
+  }
+
+  loginWithGithub(): void {
+    const clientId = '708781915546-baash0a8qekja8qro6ionv1gp8qf805c.apps.googleusercontent.com'; // À remplacer par votre client ID
+    const redirectUri = 'http://localhost:8081/api/auth/oauth2/callback/github';
+    const scope = 'user:email read:user';
+    
+    const authUrl = `https://github.com/login/oauth/authorize?` +
+      `client_id=${clientId}&` +
+      `redirect_uri=${encodeURIComponent(redirectUri)}&` +
+      `scope=${encodeURIComponent(scope)}`;
+    
+    window.location.href = authUrl;
+  }
 }

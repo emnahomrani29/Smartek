@@ -29,6 +29,10 @@ spring:
           uri: lb://offers-service
           predicates:
             - Path=/api/interviews/**
+        - id: notifications-service
+          uri: lb://offers-service
+          predicates:
+            - Path=/api/notifications/**
         - id: course-service
           uri: lb://course-service
           predicates:
@@ -65,6 +69,7 @@ spring:
               - OPTIONS
             allowed-headers: "*"
             allow-credentials: true
+            max-age: 3600
 
 eureka:
   client:

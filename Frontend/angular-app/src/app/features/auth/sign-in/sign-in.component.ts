@@ -57,4 +57,12 @@ export class SignInComponent {
       });
     }
   }
+
+  loginWithGoogle() {
+    this.authService.loginWithGoogle();
+  }
+
+  loginWithGithub() {
+    this.authService.loginWithGithub();
+  }
 }

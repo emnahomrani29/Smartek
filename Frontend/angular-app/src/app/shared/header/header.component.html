@@ -25,6 +25,9 @@
 
     <!-- Desktop Buttons / User Menu -->
     <div class="flex items-center gap-4">
+      <!-- Notification Bell (si connecté et learner) -->
+      <app-notification-bell-simple *ngIf="isAuthenticated() && isLearner()"></app-notification-bell-simple>
+      
       <!-- Boutons Sign In/Sign Up (si non connecté) -->
       <ng-container *ngIf="!isAuthenticated()">
         <button (click)="openSignIn()" class="hidden lg:block bg-transparent text-blue-600 border-2 hover:bg-blue-600 border-blue-600 hover:text-white duration-300 px-6 py-2.5 rounded-lg font-semibold hover:cursor-pointer hover:shadow-lg transition-all">
@@ -51,7 +54,7 @@
             <p class="text-xs text-gray-500 truncate">{{ currentUser?.email }}</p>
           </div>
           
-          <button (click)="goToDashboard()" class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-3 transition">
+          <button *ngIf="canAccessDashboard()" (click)="goToDashboard()" class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-3 transition">
             <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
             </svg>
@@ -137,7 +140,7 @@
         </div>
         
         <div class="flex flex-col gap-2">
-          <button (click)="goToDashboard()" class="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 rounded-lg flex items-center gap-3 transition">
+          <button *ngIf="canAccessDashboard()" (click)="goToDashboard()" class="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 rounded-lg flex items-center gap-3 transition">
             <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
             </svg>

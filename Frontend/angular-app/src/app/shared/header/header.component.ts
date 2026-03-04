@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private dataService: DataService,
     private router: Router,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.dataService.getData().subscribe(data => {
@@ -32,10 +32,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
 
     window.addEventListener('scroll', this.handleScroll.bind(this));
-    
+
     // Vérifier si l'utilisateur est connecté
     this.currentUser = this.authService.getUserInfo();
-    
+
     // Si connecté, récupérer les données à jour depuis la base de données
     if (this.isAuthenticated()) {
       this.authService.fetchUserData().subscribe({
@@ -46,10 +46,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
           console.error('Error fetching user data:', error);
         }
       });
-      
+
       this.startUserValidation();
     }
-    
+
     // Fermer le menu utilisateur quand on clique en dehors
     document.addEventListener('click', this.handleClickOutside.bind(this));
   }

@@ -25,13 +25,12 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         console.log('Utilisateur non autorisé ou token invalide, déconnexion...');
         authService.logout();
       }
-      
+
       // Si l'utilisateur a été supprimé (404 sur les endpoints utilisateur)
       if (error.status === 404 && error.url?.includes('/api/users/')) {
         console.log('Utilisateur introuvable, déconnexion...');
         authService.logout();
       }
-
       return throwError(() => error);
     })
   );

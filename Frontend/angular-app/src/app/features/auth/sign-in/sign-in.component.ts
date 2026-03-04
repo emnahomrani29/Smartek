@@ -37,12 +37,12 @@ export class SignInComponent {
     if (this.signInForm.valid && !this.isLoading) {
       this.isLoading = true;
       this.errorMessage = '';
-      
+
       const loginData = {
         email: this.signInForm.value.email,
         password: this.signInForm.value.password
       };
-      
+
       this.authService.login(loginData).subscribe({
         next: (response: AuthResponse) => {
           console.log('Login successful:', response);

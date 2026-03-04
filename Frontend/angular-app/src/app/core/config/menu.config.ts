@@ -26,7 +26,8 @@ export const MENU_ITEMS: MenuItem[] = [
     label: 'Course Management',
     icon: 'school',
     route: '/dashboard/courses',
-    roles: [Role.RH_SMARTEK, Role.TRAINER]
+    roles: [Role.RH_SMARTEK, Role.TRAINER],
+    permissions: [Permission.COURSES_VIEW, Permission.COURSES_CREATE]
   },
 
   // My Courses - LEARNER
@@ -43,7 +44,8 @@ export const MENU_ITEMS: MenuItem[] = [
     label: 'Exam Management',
     icon: 'assignment',
     route: '/dashboard/exams',
-    roles: [Role.RH_SMARTEK, Role.TRAINER]
+    roles: [Role.RH_SMARTEK, Role.TRAINER],
+    permissions: [Permission.EXAMS_VIEW, Permission.EXAMS_CREATE]
   },
 
   // My Exams - LEARNER
@@ -74,10 +76,18 @@ export const MENU_ITEMS: MenuItem[] = [
 
   // Certification & Badge Management - RH_SMARTEK
   {
-    label: 'Certifications & Badges',
+    label: 'Certifications',
     icon: 'workspace_premium',
     route: '/dashboard/certifications',
-    permissions: [Permission.CERTIFICATIONS_VIEW, Permission.BADGES_VIEW]
+    roles: [Role.TRAINER, Role.RH_SMARTEK, Role.ADMIN],
+    permissions: [Permission.CERTIFICATIONS_VIEW]
+  },
+  {
+    label: 'Badges',
+    icon: 'military_tech',
+    route: '/dashboard/badges',
+    roles: [Role.TRAINER, Role.RH_SMARTEK, Role.ADMIN],
+    permissions: [Permission.BADGES_VIEW]
   },
 
   // My Certifications - LEARNER
@@ -87,6 +97,13 @@ export const MENU_ITEMS: MenuItem[] = [
     route: '/dashboard/my-certifications',
     roles: [Role.LEARNER],
     permissions: [Permission.CERTIFICATIONS_VIEW]
+  },
+  {
+    label: 'My Badges',
+    icon: 'verified',
+    route: '/dashboard/my-badges',
+    roles: [Role.LEARNER],
+    permissions: [Permission.BADGES_VIEW]
   },
 
   // Skill Evidence - LEARNER, TRAINER, RH_SMARTEK

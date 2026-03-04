@@ -17,12 +17,24 @@
             "href": "/#events-section"
         },
         {
+            "label": "Mentors",
+            "href": "/#mentors-section"
+        },
+        {
+            "label": "Testimonial",
+            "href": "/#testimonial-section"
+        },
+        {
             "label": "Join",
             "href": "/#join-section"
         },
         {
             "label": "Contact Us",
             "href": "/#contact"
+        },
+        {
+            "label": "Docs",
+            "href": "/documentation"
         }
     ],
     "CourseData": [
@@ -280,6 +292,14 @@
                 {
                     "label": "Events",
                     "href": "/#events-section"
+                },
+                {
+                    "label": "Mentors",
+                    "href": "/#mentors-section"
+                },
+                {
+                    "label": "Testimonial",
+                    "href": "/#testimonial-section"
                 },
                 {
                     "label": "Join",

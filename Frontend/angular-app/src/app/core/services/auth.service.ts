@@ -39,7 +39,7 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router
-  ) {}
+  ) { }
 
   register(request: RegisterRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/register`, request).pipe(
@@ -80,7 +80,7 @@ export class AuthService {
   getUserInfo(): AuthResponse | null {
     const userInfo = localStorage.getItem('userInfo');
     if (!userInfo) return null;
-    
+
     try {
       const parsed = JSON.parse(userInfo);
       // S'assurer que experience existe, sinon mettre 0 par défaut

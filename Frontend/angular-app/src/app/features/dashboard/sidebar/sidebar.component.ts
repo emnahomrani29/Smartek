@@ -21,15 +21,15 @@ export class SidebarComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private permissionService: PermissionService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // Charger les données depuis le localStorage d'abord
     this.currentUser = this.authService.getUserInfo();
-    
+
     // Filtrer les menus selon les permissions
     this.filterMenuItems();
-    
+
     // Puis récupérer les données à jour depuis la base de données
     this.authService.fetchUserData().subscribe({
       next: (userData) => {
@@ -50,8 +50,8 @@ export class SidebarComponent implements OnInit {
       }
 
       // Si pas de permissions/rôles requis, afficher
-      if ((!item.permissions || item.permissions.length === 0) && 
-          (!item.roles || item.roles.length === 0)) {
+      if ((!item.permissions || item.permissions.length === 0) &&
+        (!item.roles || item.roles.length === 0)) {
         return true;
       }
 
@@ -96,7 +96,6 @@ export class SidebarComponent implements OnInit {
   isMenuExpanded(label: string): boolean {
     return this.expandedMenus.has(label);
   }
-
   getUserInitial(): string {
     return this.currentUser?.firstName?.charAt(0).toUpperCase() || 'U';
   }
@@ -110,7 +109,7 @@ export class SidebarComponent implements OnInit {
 
   formatRole(role: string | undefined): string {
     if (!role) return 'User';
-    
+
     const roleMap: { [key: string]: string } = {
       'LEARNER': 'Learner',
       'TRAINER': 'Trainer',
@@ -119,7 +118,7 @@ export class SidebarComponent implements OnInit {
       'SPONSOR': 'Sponsor',
       'ADMIN': 'Administrator'
     };
-    
+
     return roleMap[role] || role;
   }
 }

@@ -1,0 +1,12 @@
+/Users/mimi/anas/Backend/auth-service/src/main/java/com/smartek/authservice/AuthServiceApplication.java
+/Users/mimi/anas/Backend/auth-service/src/main/java/com/smartek/authservice/config/SecurityConfig.java
+/Users/mimi/anas/Backend/auth-service/src/main/java/com/smartek/authservice/controller/AuthController.java
+/Users/mimi/anas/Backend/auth-service/src/main/java/com/smartek/authservice/dto/AuthResponse.java
+/Users/mimi/anas/Backend/auth-service/src/main/java/com/smartek/authservice/dto/LoginRequest.java
+/Users/mimi/anas/Backend/auth-service/src/main/java/com/smartek/authservice/dto/RegisterRequest.java
+/Users/mimi/anas/Backend/auth-service/src/main/java/com/smartek/authservice/entity/User.java
+/Users/mimi/anas/Backend/auth-service/src/main/java/com/smartek/authservice/enums/RoleType.java
+/Users/mimi/anas/Backend/auth-service/src/main/java/com/smartek/authservice/repository/UserRepository.java
+/Users/mimi/anas/Backend/auth-service/src/main/java/com/smartek/authservice/service/AuthService.java
+/Users/mimi/anas/Backend/auth-service/src/main/java/com/smartek/authservice/service/JwtService.java
+/Users/mimi/anas/Backend/auth-service/src/main/java/com/smartek/authservice/util/PasswordHashGenerator.java
